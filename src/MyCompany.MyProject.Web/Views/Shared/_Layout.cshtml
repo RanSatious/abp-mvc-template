@@ -43,6 +43,10 @@
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="~/Assets/layui/layui.js"></script>
+    <script type="text/javascript" src="~/Assets/lib/require.js"></script>
+    <script>
+        requirejs(['/assets/lib/config.js?v=' + _version]);
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

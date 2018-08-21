@@ -1,10 +1,7 @@
-define([
-  'jquery',
-  'abp/abp',
-  'layui/layui',
-  'depend!apiService[abp/abp]',
-  'depend!scriptService[abp/abp]',
-  'css!/assets/css/main.css'
-], function($, abp, layui) {
-  console.log('main loaded', $, abp, layui);
+define(['jquery', 'abp/abp', 'depend!apiService[abp/abp]', 'depend!scriptService[abp/abp]'], function($, abp) {
+  console.log('main loaded');
+  return {
+    $: $,
+    abp: abp
+  };
 });

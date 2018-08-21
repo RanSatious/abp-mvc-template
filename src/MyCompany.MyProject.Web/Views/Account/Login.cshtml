@@ -13,7 +13,7 @@
     </style>
 }
 <div class="login-form">
-    <form class="layui-form" action="">
+    <form class="layui-form">
         <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
         <input type="hidden" name="returnUrlHash" />
         <div class="layui-form-item">
@@ -30,7 +30,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+                <button class="layui-btn" lay-submit>登录</button>
             @if (Model.IsSelfRegistrationAllowed)
             {
                 <button class="layui-btn layui-btn-primary">注册</button>

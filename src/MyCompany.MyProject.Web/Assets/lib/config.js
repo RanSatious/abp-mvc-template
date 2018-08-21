@@ -13,6 +13,7 @@ requirejs.config({
     // requireJs plugins
     depend: 'lib/requirejs-plugins/depend',
     text: 'lib/requirejs-plugins/text',
+    lay: 'lib/requirejs-plugins/lay',
 
     // abp dynamic script
     apiService: '/api/AbpServiceProxies/GetAll?t=' + timeStamp,
@@ -23,15 +24,13 @@ requirejs.config({
     babel: 'node_modules/requirejs-babel/babel-5.8.34.min',
     polyfill: 'node_modules/babel-polyfill/dist/polyfill.min'
   },
-  shim: {
-    'layui/layui': ['css!layui/css/layui.css']
-  },
   map: {
     '*': {
       css: 'lib/require-css/css' // or whatever the path to require-css is
     }
-  }
+  },
+  urlArgs: 'v=' + timeStamp
 });
 requirejs(['polyfill'], function() {
-  requirejs([_jsPath || 'main']);
+  requirejs([_jsPath || 'app/main']);
 });
