@@ -30,12 +30,13 @@
     @foreach (var menuItem in Model.MainMenu.Items)
     {
         <li class="layui-nav-item @(activeNames.Contains(menuItem.Name) ? "layui-this" : "")">
-            @if (menuItem.Items.IsNullOrEmpty())
+            @if (menuItem.Items.Count == 0)
             {
                 <a href="@calculateMenuUrl(menuItem.Url)">@menuItem.DisplayName</a>
             }
             else
             {
+                <a href="javascript:;">@menuItem.DisplayName</a>
                 <dl class="layui-nav-child">
                     @foreach (var subMenuItem in menuItem.Items)
                     {
