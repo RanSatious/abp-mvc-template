@@ -26,6 +26,7 @@
     <title>MyProject</title>
 
     <link rel="stylesheet" href="~/Assets/layui/css/layui.css" />
+    <link rel="stylesheet" href="~/Assets/css/main.css" />
     @RenderSection("styles", required: false)
 
     <script type="text/javascript">
@@ -35,18 +36,57 @@
         var _jsPath = '@(ViewBag.JsPath ?? string.Empty)';
     </script>
 </head>
-<body>
-    @RenderBody()
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="~/Assets/layui/layui.js"></script>
-    <script type="text/javascript" src="~/Assets/lib/require.js"></script>
-    <script>
-        requirejs(['/assets/lib/config.js?v=' + _version]);
-    </script>
-    @RenderSection("scripts", required: false)
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">后台布局</div>
+        <ul class="layui-nav layui-layout-left"> 
+            <li class="layui-nav-item"><a href="">Menu1</a></li>
+            <li class="layui-nav-item"><a href="">Menu2</a></li>
+            <li class="layui-nav-item"><a href="">Menu3</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">Menu4</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">Sub1</a></dd>
+                    <dd><a href="">Sub2</a></dd>
+                    <dd><a href="">Sub3</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    Admin
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">Exit</a></li>
+        </ul>
+    </div>
+    <div class="layui-body no-side">
+        <!-- 内容主体区域 -->
+        @RenderBody()
+    </div>
+        
+    <div class="layui-footer no-side">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="~/Assets/layui/layui.js"></script>
+<script type="text/javascript" src="~/Assets/lib/require.js"></script>
+<script>
+    requirejs(['/assets/lib/config.js?v=' + _version]);
+</script>
+@RenderSection("scripts", required: false)
 </body>
 </html>

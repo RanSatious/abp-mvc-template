@@ -1,0 +1,6 @@
+.layui-body.no-side {
+  left: 0;
+}
+.layui-layout-admin .layui-footer.no-side {
+  left: 0;
+}
