@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="zh-CN">
+  <texts>
+    <text name="InternalServerError" value="请求出错了!" />
+    <text name="ValidationError" value="请求出错了!" />
+    <text name="AreYouSure" value="您确定吗?" />
+    <text name="Cancel" value="否" />
+    <text name="Yes" value="是" />
+    <text name="ValidationNarrativeTitle" value="参数错误." />
+    <text name="DefaultError" value="出错了!" />
+    <text name="DefaultErrorDetail" value="发生了一个错误." />
+    <text name="DefaultError401" value="未登录!" />
+    <text name="DefaultErrorDetail401" value="请登录后再试." />
+    <text name="DefaultError403" value="无权限!" />
+    <text name="DefaultErrorDetail403" value="您没有权限进行这个操作." />
+    <text name="DefaultError404" value="页面未找到!" />
+    <text name="DefaultErrorDetail404" value="请求的页面不存在." />
+    <text name="EntityNotFound" value="没有查询到数据!" />
+  </texts>
+</localizationDictionary>

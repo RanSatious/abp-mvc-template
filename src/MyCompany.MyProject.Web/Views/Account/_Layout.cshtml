@@ -1,17 +1,23 @@
 ﻿@using System.Threading
 @using System.Web.Optimization
+@using Abp.Configuration
 @using Abp.Timing
 @using MyCompany.MyProject
-@using MyCompany.MyProject.Web.Helpers
+@using MyCompany.MyProject.Configuration
+@using Abp.Dependency
+@using Abp.Web.Mvc.Alerts
+@using Abp.Web.Mvc.Extensions
 @{
+    Layout = null;
     SetAntiForgeryCookie();
+    var version = DateTime.Now.Ticks;
 }
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -19,53 +25,26 @@
 
     <title>MyProject</title>
 
-    @Styles.Render("~/Bundles/account-vendor/css")
-
-    <!-- View specific styles -->
+    <link rel="stylesheet" href="~/Assets/layui/css/layui.css" />
     @RenderSection("styles", required: false)
 
     <script type="text/javascript">
-        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
         var abp = abp || {}; abp.appPath = '@ApplicationPath';
+        var _version = @version;
+        var _jsPath = '@(ViewBag.JsPath ?? string.Empty)';
     </script>
-
 </head>
-<body class="login-page">
-    <div class="login-box">
-        <div class="logo">
-            <a href="javascript:void(0);">MyProject</a>
-        </div>
-
-        @if (ViewBag.IsMultiTenancyEnabled)
-        {
-            @Html.Action("TenantChange", "Account")
-        }
-
-        @RenderBody()
-
-        @Html.Action("_AccountLanguages", "Account")
-
-        <div class="row">
-            <div class="col-xs-12 text-center" style="color: #e9e9e9">
-                <small>&copy; @DateTime.Now.Year MyProject. <b>Version </b> @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]</small>
-            </div>
-        </div>
-
-    </div>
-
-    @Scripts.Render("~/Bundles/account-vendor/js/bottom")
-
+<body>
+    @RenderBody()
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="~/Assets/lib/require.js" type="text/javascript"></script>
     <script>
-        //Localizing momentjs
-        moment.locale('@Thread.CurrentThread.CurrentUICulture.Name');
+        requirejs(['/assets/lib/config.js?v=' + _version]);
     </script>
-
-    <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
-    <script src="~/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>
-    <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
-
-    <!-- View specific scripts -->
     @RenderSection("scripts", required: false)
-    @Html.PartialViewScripts()
 </body>
 </html>
