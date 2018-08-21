@@ -1,0 +1,51 @@
+﻿@using Abp.Application.Navigation
+@using Abp.Collections.Extensions
+@using MyCompany.MyProject.Web.Views
+@model MyCompany.MyProject.Web.Models.Layout.MainMenuNavViewModel
+@{
+    var calculateMenuUrl = new Func<string, string>((url) =>
+    {
+        if (string.IsNullOrEmpty(url))
+        {
+            return ApplicationPath;
+        }
+
+        if (UrlChecker.IsRooted(url))
+        {
+            return url;
+        }
+
+        return ApplicationPath + url;
+    });
+
+    var activeNames = new List<string>();
+    var parent = string.Empty;
+    foreach (string name in Model.ActiveMenuItemName.Split('.'))
+    {
+        activeNames.Add(string.IsNullOrEmpty(parent) ? name : string.Format("{0}.{1}", parent, name));
+        parent = activeNames.Last();
+    }
+}
+<ul class="layui-nav layui-layout-left">
+    @foreach (var menuItem in Model.MainMenu.Items)
+    {
+        <li class="layui-nav-item @(activeNames.Contains(menuItem.Name) ? "layui-this" : "")">
+            @if (menuItem.Items.IsNullOrEmpty())
+            {
+                <a href="@calculateMenuUrl(menuItem.Url)">@menuItem.DisplayName</a>
+            }
+            else
+            {
+                <dl class="layui-nav-child">
+                    @foreach (var subMenuItem in menuItem.Items)
+                    {
+                        <dd class="@(activeNames.Contains(subMenuItem.Name) ? "layui-this" : "")">
+                            <a href="@calculateMenuUrl(subMenuItem.Url)">@subMenuItem.DisplayName</a>
+                        </dd>
+                    }
+                </dl>
+            }
+        </li>
+
+    }
+</ul>

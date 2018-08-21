@@ -428,22 +428,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Abp\Framework\scripts\abp.js" />
-    <Content Include="Abp\Framework\scripts\libs\abp.blockUI.js" />
-    <Content Include="Abp\Framework\scripts\libs\abp.jquery.js" />
-    <Content Include="Abp\Framework\scripts\libs\abp.jtable.js" />
-    <Content Include="Abp\Framework\scripts\libs\abp.moment.js" />
-    <Content Include="Abp\Framework\scripts\libs\abp.signalr-client.js" />
-    <Content Include="Abp\Framework\scripts\libs\abp.signalr.js" />
-    <Content Include="Abp\Framework\scripts\libs\abp.spin.js" />
-    <Content Include="Abp\Framework\scripts\libs\abp.sweet-alert.js" />
-    <Content Include="Abp\Framework\scripts\libs\abp.toastr.js" />
-    <Content Include="Abp\Framework\scripts\libs\angularjs\abp.ng.js" />
-    <Content Include="Abp\Framework\scripts\libs\requirejs\plugins\service.js" />
-    <Content Include="Abp\Framework\scripts\utils\ie10fix.js" />
     <Content Include="Assets\abp\abp.core.js" />
     <Content Include="Assets\abp\abp.jquery.js" />
     <Content Include="Assets\abp\abp.js" />
+    <Content Include="Assets\app\account\login.js" />
+    <Content Include="Assets\app\main.js" />
     <Content Include="Assets\layui\css\layui.css" />
     <Content Include="Assets\layui\css\layui.mobile.css" />
     <Content Include="Assets\layui\css\modules\code.css" />
@@ -575,13 +564,11 @@
     <Content Include="Views\Account\Login.css">
       <DependentUpon>Login.less</DependentUpon>
     </Content>
-    <Content Include="Views\Account\Login.js" />
     <Content Include="Views\Account\Login.min.css">
       <DependentUpon>Login.css</DependentUpon>
     </Content>
     <Content Include="Views\Home\Index.js" />
     <Content Include="Views\Shared\_Layout.css" />
-    <Content Include="Views\Shared\_Layout.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -599,11 +586,13 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\Results\ChallengeResult.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Models\Account\TenantChangeModalViewModel.cs" />
     <Compile Include="Models\Account\TenantChangeViewModel.cs" />
     <Compile Include="Models\Common\Modals\ModalHeaderViewModel.cs" />
+    <Compile Include="Models\Layout\MainMenuNavViewModel.cs" />
     <Compile Include="Models\Layout\RightSideBarViewModel.cs" />
     <Compile Include="Models\Account\LoginFormViewModel.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
@@ -634,6 +623,7 @@
     <Content Include="Views\Account\_Layout.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Account\_ViewStart.cshtml" />
+    <Content Include="Views\Layout\_MainMenuNav.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -40,19 +40,7 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">后台布局</div>
-        <ul class="layui-nav layui-layout-left"> 
-            <li class="layui-nav-item"><a href="">Menu1</a></li>
-            <li class="layui-nav-item"><a href="">Menu2</a></li>
-            <li class="layui-nav-item"><a href="">Menu3</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">Menu4</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">Sub1</a></dd>
-                    <dd><a href="">Sub2</a></dd>
-                    <dd><a href="">Sub3</a></dd>
-                </dl>
-            </li>
-        </ul>
+        @Html.Action("MainMenuNav", "Layout", new { activeMenu = ViewBag.ActiveMenu })
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">

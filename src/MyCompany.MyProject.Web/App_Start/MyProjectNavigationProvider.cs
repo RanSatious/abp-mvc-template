@@ -25,35 +25,43 @@ namespace MyCompany.MyProject.Web
                     )
                 ).AddItem(
                     new MenuItemDefinition(
-                        PageNames.Tenants,
-                        L("Tenants"),
-                        url: "Tenants",
-                        icon: "business",
-                        requiredPermissionName: PermissionNames.Pages_Tenants
+                        PageNames.Profile,
+                        L("Profile"),
+                        url: "Profile",
+                        icon: "",
+                        requiresAuthentication: true
                     )
                 ).AddItem(
                     new MenuItemDefinition(
-                        PageNames.Users,
-                        L("Users"),
-                        url: "Users",
-                        icon: "people",
-                        requiredPermissionName: PermissionNames.Pages_Users
-                    )
-                ).AddItem(
-                    new MenuItemDefinition(
-                        PageNames.Roles,
-                        L("Roles"),
-                        url: "Roles",
-                        icon: "local_offer",
-                        requiredPermissionName: PermissionNames.Pages_Roles
-                    )
-                )
-                .AddItem(
-                    new MenuItemDefinition(
-                        PageNames.About,
-                        L("About"),
-                        url: "About",
-                        icon: "info"
+                        PageNames.Administration.Index,
+                        L("Admin"),
+                        url: "Admin",
+                        icon: "",
+                        requiredPermissionName: PermissionNames.Pages_Administration
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            PageNames.Administration.Users,
+                            L("Users"),
+                            url: "Admin/Users",
+                            icon: "",
+                            requiredPermissionName: PermissionNames.Pages_Administration_Users
+                        )
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            PageNames.Administration.Roles,
+                            L("Roles"),
+                            url: "Admin/Roles",
+                            icon: "",
+                            requiredPermissionName: PermissionNames.Pages_Administration_Users
+                        )
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            PageNames.Administration.OrganizationUnits,
+                            L("OrganizationUnits"),
+                            url: "Admin/OrganizationUnits",
+                            icon: "",
+                            requiredPermissionName: PermissionNames.Pages_Administration_OrganizationUnits
+                        )
                     )
                 );
         }
