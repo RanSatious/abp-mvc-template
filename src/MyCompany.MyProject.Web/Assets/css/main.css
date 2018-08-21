@@ -1,3 +1,6 @@
+.layui-body {
+  padding: 10px;
+}
 .layui-body.no-side {
   left: 0;
 }
