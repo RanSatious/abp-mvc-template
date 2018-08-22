@@ -1,8 +1,16 @@
-define(['main', 'lay!table', 'lay!form', 'lay!layer'], function(main) {
+define(['main', 'app/admin/userModal', 'lay!table', 'lay!form'], function(main, userModal) {
   var $ = layui.$;
   var table = layui.table;
   var form = layui.form;
-  var layer = layui.layer;
+
+  var userService = abp.services.app.user;
+
+  var roleService = abp.services.app.role;
+  var roles = [];
+  roleService.getAll({}).then(function(result) {
+    console.log(result);
+    roles = result.items;
+  });
 
   table.render({
     elem: '#main-table',
@@ -33,26 +41,42 @@ define(['main', 'lay!table', 'lay!form', 'lay!layer'], function(main) {
         { field: 'userName', title: 'userName' },
         { field: 'name', title: 'name' },
         { field: 'surname', title: 'surname' },
-        { field: 'test', title: '可用', width: 85, templet: '#switchTpl', unresize: true },
-        { field: 'action', title: '操作', width: 120, toolbar: '#actionTpl', align: 'center', unresize:true },
+        { field: 'action', title: '操作', width: 120, toolbar: '#actionTpl', align: 'center', unresize: true }
       ]
     ]
   });
 
-  form.on('switch(sexDemo)', function(obj) {
-    layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+  //监听工具条
+  table.on('tool(user)', function(obj) {
+    var data = obj.data;
+    if (obj.event == 'edit') {
+      userModal.edit({ item: data, roles: roles }, function() {
+        table.reload('main-table');
+      });
+    } else if (obj.event === 'delete') {
+      abp.message.confirm('是否删除？').then(function(result) {
+        if (!result) return;
+        userService.delete({ id: data.id }).then(function() {
+          table.reload('main-table');
+        });
+      });
+    }
   });
 
   form.on('submit', function(data) {
-    console.log(data);
+    return false;
+  });
+
+  form.on('submit(search)', function(data) {
+    table.reload('main-table', {
+      where: data.field
+    });
     return false;
   });
 
   $('#btn-add').click(function() {
-    layer.open({
-      type: 1,
-      title: '新增11',
-      content: '<b>123</b>'
+    userModal.create({ roles: roles }, function() {
+      table.reload('main-table');
     });
   });
 });

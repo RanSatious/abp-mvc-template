@@ -1,6 +1,6 @@
 define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'lay!laytpl'], function(
   main,
-  roleModalView
+  modalView
 ) {
   console.log('role modal loaded');
   var form = layui.form;
@@ -27,8 +27,10 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
         type: 1,
         title: item ? '编辑' : '新增',
         area: '400px',
-        content: laytpl(roleModalView).render(item || {})
+        content: modalView
       });
+
+      item && form.val('form-role', item);
 
       modal.callback = callback;
       modal.init();

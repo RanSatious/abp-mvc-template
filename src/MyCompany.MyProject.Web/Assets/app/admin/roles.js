@@ -47,7 +47,7 @@ define(['main', 'app/admin/roleModal', 'lay!table', 'lay!form'], function(main, 
         table.reload('main-table');
       });
     } else if (obj.event === 'delete') {
-      abp.message.confirm('是否删除').then(function(result) {
+      abp.message.confirm('是否删除？').then(function(result) {
         if (!result) return;
         roleServices.delete({ id: data.id }).then(function() {
           table.reload('main-table');
@@ -57,6 +57,13 @@ define(['main', 'app/admin/roleModal', 'lay!table', 'lay!form'], function(main, 
   });
 
   form.on('submit', function(data) {
+    return false;
+  });
+  form.on('submit(search)', function(data) {
+    console.log(data);
+    table.reload('main-table', {
+      where: data.field
+    });
     return false;
   });
 
