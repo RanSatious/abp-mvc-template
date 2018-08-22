@@ -1,4 +1,4 @@
-define(['jquery', 'abp/abp', 'lay!element', 'depend!apiService[abp/abp]', 'depend!scriptService[abp/abp]'], function(
+define(['jquery', 'abp/abp', 'depend!apiService[abp/abp]', 'depend!scriptService[abp/abp]', 'lay!element'], function(
   $,
   abp
 ) {

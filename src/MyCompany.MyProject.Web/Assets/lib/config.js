@@ -7,6 +7,8 @@ var console = console || {
 requirejs.config({
   baseUrl: '/assets',
   paths: {
+    main: 'app/main',
+    
     // core libary
     jquery: 'node_modules/jquery/dist/jquery.min',
 

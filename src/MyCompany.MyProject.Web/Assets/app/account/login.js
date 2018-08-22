@@ -1,4 +1,5 @@
-define(['abp/abp', 'lay!form'], function(abp) {
+define(['main', 'lay!form'], function(main) {
+  var abp = main.abp;
   var form = layui.form;
   form.on('submit', function(data) {
     abp

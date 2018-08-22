@@ -1,5 +1,26 @@
+/* global style start */
+.t-l {
+  text-align: left;
+}
+.t-c {
+  text-align: center;
+}
+.t-r {
+  text-align: right;
+}
+.f-l {
+  float: left;
+}
+.f-r {
+  float: right;
+}
+.clear {
+  clear: both;
+}
+/* global style end */
+/* overrid layui start */
 .layui-body {
-  padding: 10px;
+  padding: 20px 10px;
 }
 .layui-body.no-side {
   left: 0;
@@ -7,3 +28,10 @@
 .layui-layout-admin .layui-footer.no-side {
   left: 0;
 }
+/* overrid layui end */
+
+/* modal style start */
+.modal-container {
+  padding: 10px;
+}
+/* modal style end */

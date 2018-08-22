@@ -1,0 +1,27 @@
+<div class="modal-container">
+  <div class="layui-tab">
+    <ul class="layui-tab-title">
+      <li class="layui-this">信息</li>
+      <li>权限</li>
+    </ul>
+    <div class="layui-tab-content">
+      <div class="layui-tab-item layui-show">
+        <form class="layui-form">
+          <div class="layui-form-item">
+            <input type="text" name="name" placeholder="角色名" lay-verify="required" autocomplete="off" class="layui-input">
+          </div>
+          <div class="layui-form-item">
+            <input type="text" name="displayName" placeholder="显示名称" lay-verify="required" autocomplete="off" class="layui-input">
+          </div>
+          <div class="layui-form-item">
+            <textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+          </div>
+          <div class="layui-form-item t-c">
+            <button class="layui-btn" lay-submit lay-filter="addRole">确定</button>
+          </div>
+        </form>
+      </div>
+      <div class="layui-tab-item">todo</div>
+    </div>
+  </div>
+</div>
