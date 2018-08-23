@@ -1,7 +1,4 @@
-define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'lay!laytpl'], function(
-  main,
-  modalView
-) {
+define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'lay!laytpl'], function(main, modalView) {
   console.log('role modal loaded');
   var form = layui.form;
   var layer = layui.layer;
@@ -11,44 +8,54 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
 
   var modal = {
     index: 0,
+    isEdit: false,
+    model: {},
     callback: null,
-    init: function() {
+    init: function(params) {
+      modal.model = params.model;
+      modal.callback = params.callback;
+
+      modal.isEdit && form.val('form-role', modal.model);
+
       form.on('submit(addRole)', function(data) {
-        roleServices.create(modal.normalize(data.field)).then(function(result) {
-          console.log(result);
+        var action = modal.isEdit ? roleServices.update : roleServices.create;
+        action(modal.normalize(data.field)).then(function(result) {
           modal.callback && modal.callback(result);
           layer.close(modal.index);
         });
         return false;
       });
     },
-    open: function(item, callback) {
+    open: function(params) {
       modal.index = layer.open({
         type: 1,
-        title: item ? '编辑' : '新增',
+        title: modal.isEdit ? '编辑' : '新增',
         area: '400px',
         content: modalView
       });
-
-      item && form.val('form-role', item);
-
-      modal.callback = callback;
-      modal.init();
+      modal.init(params);
     },
     close: function() {
       layer.close(modal.index);
     },
     normalize: function(data) {
-      return Object.assign({}, data, { isStatic: false, normalizedName: '', permissions: [] });
+      return Object.assign({ isStatic: false, normalizedName: '', permissions: [] }, modal.model, data);
     }
   };
 
   return {
     create: function(callback) {
-      modal.open(undefined, callback);
+      modal.open({
+        callback: callback
+      });
+      modal.isEdit = false;
     },
-    edit: function(item, callback) {
-      modal.open(item, callback);
+    edit: function(model, callback) {
+      modal.open({
+        model: model,
+        callback: callback
+      });
+      modal.isEdit = true;
     },
     close: modal.close
   };

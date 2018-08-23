@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
 using Abp.Authorization.Users;
@@ -35,6 +36,6 @@ namespace MyCompany.MyProject.Users.Dto
 
         public DateTime CreationTime { get; set; }
 
-        public string[] Roles { get; set; }
+        public List<string[]> Roles { get; set; }
     }
 }

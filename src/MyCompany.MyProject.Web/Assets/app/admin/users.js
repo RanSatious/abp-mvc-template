@@ -40,7 +40,7 @@ define(['main', 'app/admin/userModal', 'lay!table', 'lay!form'], function(main, 
         { field: 'id', title: 'ID' },
         { field: 'userName', title: 'userName' },
         { field: 'name', title: 'name' },
-        { field: 'surname', title: 'surname' },
+        { field: 'roles', title: 'roles', templet: '#roleTpl' },
         { field: 'action', title: '操作', width: 120, toolbar: '#actionTpl', align: 'center', unresize: true }
       ]
     ]
@@ -50,8 +50,12 @@ define(['main', 'app/admin/userModal', 'lay!table', 'lay!form'], function(main, 
   table.on('tool(user)', function(obj) {
     var data = obj.data;
     if (obj.event == 'edit') {
-      userModal.edit({ item: data, roles: roles }, function() {
-        table.reload('main-table');
+      userModal.edit({
+        model: data,
+        roles: roles,
+        callback: function() {
+          table.reload('main-table');
+        }
       });
     } else if (obj.event === 'delete') {
       abp.message.confirm('是否删除？').then(function(result) {
@@ -75,8 +79,11 @@ define(['main', 'app/admin/userModal', 'lay!table', 'lay!form'], function(main, 
   });
 
   $('#btn-add').click(function() {
-    userModal.create({ roles: roles }, function() {
-      table.reload('main-table');
+    userModal.create({
+      roles: roles,
+      callback: function() {
+        table.reload('main-table');
+      }
     });
   });
 });

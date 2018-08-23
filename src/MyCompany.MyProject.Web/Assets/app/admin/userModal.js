@@ -8,11 +8,20 @@ define(['main', 'text!/Views/Admin/_userModal.html', 'lay!form', 'lay!layer', 'l
 
   var modal = {
     index: 0,
+    isEdit: false,
+    model: {},
     callback: null,
-    init: function() {
+    roles: null,
+    init: function(params) {
+      modal.model = params.model;
+      modal.callback = params.callback;
+      modal.roles = params.roles;
+
+      form.val('form-user', modal.model);
+
       form.on('submit(addUser)', function(data) {
-        userService.create(modal.normalize(data.field)).then(function(result) {
-          console.log(result);
+        var action = modal.isEdit ? userService.update : userService.create;
+        action(modal.normalize(data.field)).then(function(result) {
           modal.callback && modal.callback(result);
           layer.close(modal.index);
         });
@@ -28,34 +37,33 @@ define(['main', 'text!/Views/Admin/_userModal.html', 'lay!form', 'lay!layer', 'l
         }
       });
     },
-    open: function(option, callback) {
-      console.log(option);
+    open: function(params) {
       modal.index = layer.open({
         type: 1,
-        title: option.item ? '编辑' : '新增',
+        title: modal.isEdit ? '编辑' : '新增',
         area: '400px',
-        content: laytpl(modalView).render(option || {})
+        content: laytpl(modalView).render(params)
       });
 
-      option.item && form.val('form-user', Object.assign({}, option.item));
-
-      modal.callback = callback;
-      modal.init();
+      modal.init(params);
     },
     close: function() {
       layer.close(modal.index);
     },
     normalize: function(data) {
-      return Object.assign({}, data, { isActive: true, surname: data.name, roleNames: [] });
+      return Object.assign({ isActive: true, surname: data.name, roleNames: [] }, modal.model, data);
     }
   };
 
   return {
-    create: function(option, callback) {
-      modal.open(Object.assign({}, option, { item: {} }), callback);
+    create: function(params) {
+      params.model = {};
+      modal.isEdit = false;
+      modal.open(params);
     },
-    edit: function(option, callback) {
-      modal.open(option, callback);
+    edit: function(params) {
+      modal.isEdit = true;
+      modal.open(params);
     },
     close: modal.close
   };

@@ -1,13 +1,17 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Authorization.Users;
+using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.IdentityFramework;
+using Abp.Linq.Extensions;
 using MyCompany.MyProject.Authorization;
 using MyCompany.MyProject.Authorization.Roles;
 using MyCompany.MyProject.Authorization.Users;
@@ -18,29 +22,62 @@ using Microsoft.AspNet.Identity;
 namespace MyCompany.MyProject.Users
 {
     [AbpAuthorize(PermissionNames.Pages_Administration_Users)]
-    public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UpdateUserDto>, IUserAppService
+    public class UserAppService : AsyncCrudAppService<User, UserDto, long, UserGetAllInput, CreateUserDto, UpdateUserDto>, IUserAppService
     {
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
         private readonly IRepository<Role> _roleRepository;
+        private readonly IRepository<UserRole, long> _userRoleRepository;
 
         public UserAppService(
             IRepository<User, long> repository, 
             UserManager userManager, 
             IRepository<Role> roleRepository, 
-            RoleManager roleManager)
+            RoleManager roleManager,
+            IRepository<UserRole, long> userRoleRepository)
             : base(repository)
         {
             _userManager = userManager;
             _roleRepository = roleRepository;
             _roleManager = roleManager;
+
+            _userRoleRepository = userRoleRepository;
+        }
+
+        public override async Task<PagedResultDto<UserDto>> GetAll(UserGetAllInput input)
+        {
+            //var orgCode = (await _organizationRepository.FirstOrDefaultAsync(input.Organization.GetValueOrDefault()))?.Code ?? string.Empty;
+
+            var queryRole = from ur in _userRoleRepository.GetAll()
+                            join role in _roleRepository.GetAll() on ur.RoleId equals role.Id
+                            select new { ur, role.Name, role.DisplayName, role.Id };
+            //var queryOrg = from uo in _userOrganizationRepository.GetAll()
+            //    join org in _organizationRepository.GetAll().Where(t => orgCode == string.Empty || t.Code.StartsWith(orgCode)) on uo.OrganizationUnitId equals org.Id
+            //    select new { uo, Name = org.DisplayName };
+
+            var query = from user in CreateFilteredQuery(input)
+                        join ur in queryRole on user.Id equals ur.ur.UserId
+                        group new { user, ur } by user into g
+                        select new { User = g.Key, Roles = g.Select(u => new {u.ur.Id, u.ur.Name, u.ur.DisplayName}) };
+
+            var totalCount = await query.CountAsync();
+            var items = await query.OrderBy(t => t.User.Id).PageBy(input).ToListAsync();
+
+            return new PagedResultDto<UserDto>(
+                totalCount,
+                items.Select(item =>
+                {
+                    var dto = item.User.MapTo<UserDto>();
+                    dto.Roles = item.Roles.Select(d => new string[] { d.Id.ToString(), d.Name, d.DisplayName }).ToList();
+                    return dto;
+                }).ToList());
         }
 
         public override async Task<UserDto> Get(EntityDto<long> input)
         {
             var user = await base.Get(input);
             var userRoles = await _userManager.GetRolesAsync(user.Id);
-            user.Roles = userRoles.Select(ur => ur).ToArray();
+            user.Roles = new List<string[]>();
             return user;
         }
 
@@ -110,7 +147,7 @@ namespace MyCompany.MyProject.Users
             ObjectMapper.Map(input, user);
         }
 
-        protected override IQueryable<User> CreateFilteredQuery(PagedResultRequestDto input)
+        protected override IQueryable<User> CreateFilteredQuery(UserGetAllInput input)
         {
             return Repository.GetAllIncluding(x => x.Roles);
         }
@@ -121,7 +158,7 @@ namespace MyCompany.MyProject.Users
             return await Task.FromResult(user);
         }
 
-        protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedResultRequestDto input)
+        protected override IQueryable<User> ApplySorting(IQueryable<User> query, UserGetAllInput input)
         {
             return query.OrderBy(r => r.UserName);
         }

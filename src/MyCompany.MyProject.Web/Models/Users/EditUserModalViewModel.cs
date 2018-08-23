@@ -13,7 +13,7 @@ namespace MyCompany.MyProject.Web.Models.Users
 
         public bool UserIsInRole(RoleDto role)
         {
-            return User.Roles != null && User.Roles.Any(r => r == role.Name);
+            return User.Roles != null && User.Roles.Any(r => r[1] == role.Name);
         }
     }
 }
