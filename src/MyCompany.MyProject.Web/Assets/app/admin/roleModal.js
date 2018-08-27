@@ -1,4 +1,7 @@
-define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'lay!laytpl'], function(main, modalView) {
+define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'lay!laytpl', 'jstree'], function(
+  main,
+  modalView
+) {
   console.log('role modal loaded');
   var form = layui.form;
   var layer = layui.layer;
@@ -10,11 +13,15 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
     index: 0,
     isEdit: false,
     model: {},
+    permissions: [],
     callback: null,
     init: function(params) {
       modal.model = params.model;
+      modal.permissions = params.permissions;
       modal.callback = params.callback;
 
+      modal.initTree();
+      console.log(modal.permissions);
       modal.isEdit && form.val('form-role', modal.model);
 
       form.on('submit(addRole)', function(data) {
@@ -24,6 +31,14 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
           layer.close(modal.index);
         });
         return false;
+      });
+    },
+    initTree: function() {
+      $('.permissions-container').jstree({
+        core: {
+          data: modal.permissions
+        },
+        plugins: ['checkbox']
       });
     },
     open: function(params) {
@@ -44,18 +59,14 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
   };
 
   return {
-    create: function(callback) {
+    create: function(params) {
       modal.isEdit = false;
-      modal.open({
-        callback: callback
-      });
+      params.model = {};
+      modal.open(params);
     },
-    edit: function(model, callback) {
+    edit: function(params) {
       modal.isEdit = true;
-      modal.open({
-        model: model,
-        callback: callback
-      });
+      modal.open(params);
     },
     close: modal.close
   };

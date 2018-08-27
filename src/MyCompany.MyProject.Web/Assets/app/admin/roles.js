@@ -8,8 +8,22 @@ define(['main', 'app/admin/roleModal', 'lib/table', 'lay!form', '!lay!layer'], f
 
   var permissions = [];
   roleServices.getAllPermissions().then(function(result) {
-    console.log(result);
-    permissions = result.items;
+    permissions = result.items.map(function(item) {
+      var names = item.name.split('.');
+      var parent = '#';
+      if (names.length > 1) {
+        names.pop();
+        parent = names.join('.');
+      }
+      return {
+        id: item.name,
+        parent: parent,
+        text: item.displayName,
+        state: {
+          opened: true
+        }
+      };
+    });
   });
 
   table.render({
@@ -33,8 +47,12 @@ define(['main', 'app/admin/roleModal', 'lib/table', 'lay!form', '!lay!layer'], f
     var data = obj.data;
     console.log(obj);
     if (obj.event == 'edit') {
-      roleModal.edit(data, function() {
-        table.reload('main-table');
+      roleModal.edit({
+        model: data,
+        permissions: permissions,
+        callback: function() {
+          table.reload('main-table');
+        }
       });
     } else if (obj.event === 'delete') {
       abp.message.confirm('是否删除？').then(function(result) {
@@ -58,8 +76,11 @@ define(['main', 'app/admin/roleModal', 'lib/table', 'lay!form', '!lay!layer'], f
   });
 
   $('#btn-add').click(function() {
-    roleModal.create(function() {
-      table.reload('main-table');
+    roleModal.create({
+      permissions: permissions,
+      callback: function() {
+        table.reload('main-table');
+      }
     });
   });
 });
