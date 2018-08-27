@@ -1,4 +1,4 @@
-define(['main', 'app/admin/userModal', 'lay!table', 'lay!form'], function(main, userModal) {
+define(['main', 'app/admin/userModal', 'lib/table', 'lay!form'], function(main, userModal) {
   var $ = layui.$;
   var table = layui.table;
   var form = layui.form;
