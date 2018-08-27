@@ -217,6 +217,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConsts.cs" />
+    <Compile Include="Dto\EntityNullableDto.cs" />
+    <Compile Include="Dto\PagedAndFilteredInputDto.cs" />
+    <Compile Include="Dto\PagedAndSortedInputDto.cs" />
+    <Compile Include="Dto\PagedInputDto.cs" />
+    <Compile Include="Dto\PagedSortedAndFilteredInputDto.cs" />
     <Compile Include="MyProjectApplicationModule.cs" />
     <Compile Include="MyProjectAppServiceBase.cs" />
     <Compile Include="Authorization\Accounts\AccountAppService.cs" />
@@ -236,6 +242,15 @@
     <Compile Include="MultiTenancy\Dto\TenantDto.cs" />
     <Compile Include="MultiTenancy\ITenantAppService.cs" />
     <Compile Include="MultiTenancy\TenantAppService.cs" />
+    <Compile Include="Organizations\Dto\CreateOrganizationUnitInput.cs" />
+    <Compile Include="Organizations\Dto\GetOrganizationUnitUsersInput.cs" />
+    <Compile Include="Organizations\Dto\MoveOrganizationUnitInput.cs" />
+    <Compile Include="Organizations\Dto\OrganizationUnitDto.cs" />
+    <Compile Include="Organizations\Dto\OrganizationUnitUserListDto.cs" />
+    <Compile Include="Organizations\Dto\UpdateOrganizationUnitInput.cs" />
+    <Compile Include="Organizations\Dto\UserToOrganizationUnitInput.cs" />
+    <Compile Include="Organizations\IOrganizationUnitAppService.cs" />
+    <Compile Include="Organizations\OrganizationUnitAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roles\Dto\CreateRoleDto.cs" />
     <Compile Include="Roles\Dto\PermissionDto.cs" />

@@ -26,5 +26,11 @@ namespace MyCompany.MyProject.Web.Controllers
         {
             return View();
         }
+
+        [AbpMvcAuthorize(PermissionNames.Pages_Administration_OrganizationUnits)]
+        public ActionResult Organizations()
+        {
+            return View();
+        }
     }
 }

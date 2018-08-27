@@ -7,7 +7,7 @@ define(['main', 'app/admin/userModal', 'lay!table', 'lay!form'], function(main, 
 
   var roleService = abp.services.app.role;
   var roles = [];
-  roleService.getAll({}).then(function(result) {
+  roleService.getAll({ maxResultCount: 99 }).then(function(result) {
     console.log(result);
     roles = result.items;
   });
@@ -37,10 +37,9 @@ define(['main', 'app/admin/userModal', 'lay!table', 'lay!form'], function(main, 
       [
         { type: 'numbers' },
         { type: 'checkbox' },
-        { field: 'id', title: 'ID' },
-        { field: 'userName', title: 'userName' },
-        { field: 'name', title: 'name' },
-        { field: 'roles', title: 'roles', templet: '#roleTpl' },
+        { field: 'userName', title: '登录名' },
+        { field: 'name', title: '用户名' },
+        { field: 'roles', title: '角色', templet: '#roleTpl' },
         { field: 'action', title: '操作', width: 120, toolbar: '#actionTpl', align: 'center', unresize: true }
       ]
     ]

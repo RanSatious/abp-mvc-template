@@ -58,7 +58,7 @@ namespace MyCompany.MyProject.Web
                         new MenuItemDefinition(
                             PageNames.Administration.OrganizationUnits,
                             L("OrganizationUnits"),
-                            url: "Admin/OrganizationUnits",
+                            url: "Admin/Organizations",
                             icon: "",
                             requiredPermissionName: PermissionNames.Pages_Administration_OrganizationUnits
                         )

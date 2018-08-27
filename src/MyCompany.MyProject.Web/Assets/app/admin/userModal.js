@@ -17,7 +17,20 @@ define(['main', 'text!/Views/Admin/_userModal.html', 'lay!form', 'lay!layer', 'l
       modal.callback = params.callback;
       modal.roles = params.roles;
 
+      modal.initForm();
+    },
+    initForm: function() {
       form.val('form-user', modal.model);
+
+      // set roles
+      if (modal.isEdit) {
+        var roles = {};
+        modal.model.roles.forEach(function(d) {
+          roles['role[' + d[1] + ']'] = true;
+        });
+        console.log(roles);
+        form.val('form-user', roles);
+      }
 
       form.on('submit(addUser)', function(data) {
         var action = modal.isEdit ? userService.update : userService.create;
@@ -51,7 +64,22 @@ define(['main', 'text!/Views/Admin/_userModal.html', 'lay!form', 'lay!layer', 'l
       layer.close(modal.index);
     },
     normalize: function(data) {
-      return Object.assign({ isActive: true, surname: data.name, roleNames: [] }, modal.model, data);
+      var item = Object.assign({ isActive: true, surname: data.name, roleNames: [] }, modal.model, data);
+      // clear roles
+      item.roleNames.length = 0;
+      // reset roles
+      var roleProps = [];
+      for (var key in item) {
+        var match = key.match(/role\[(.*)\]$/);
+        if (match && item[key] == 'on') {
+          item.roleNames.push(match[1]);
+          roleProps.push(key);
+        }
+      }
+      roleProps.forEach(function(key) {
+        delete item[key];
+      });
+      return item;
     }
   };
 

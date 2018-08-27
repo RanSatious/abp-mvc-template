@@ -46,19 +46,16 @@ namespace MyCompany.MyProject.Users
 
         public override async Task<PagedResultDto<UserDto>> GetAll(UserGetAllInput input)
         {
-            //var orgCode = (await _organizationRepository.FirstOrDefaultAsync(input.Organization.GetValueOrDefault()))?.Code ?? string.Empty;
-
             var queryRole = from ur in _userRoleRepository.GetAll()
                             join role in _roleRepository.GetAll() on ur.RoleId equals role.Id
                             select new { ur, role.Name, role.DisplayName, role.Id };
-            //var queryOrg = from uo in _userOrganizationRepository.GetAll()
-            //    join org in _organizationRepository.GetAll().Where(t => orgCode == string.Empty || t.Code.StartsWith(orgCode)) on uo.OrganizationUnitId equals org.Id
-            //    select new { uo, Name = org.DisplayName };
 
             var query = from user in CreateFilteredQuery(input)
-                        join ur in queryRole on user.Id equals ur.ur.UserId
-                        group new { user, ur } by user into g
-                        select new { User = g.Key, Roles = g.Select(u => new {u.ur.Id, u.ur.Name, u.ur.DisplayName}) };
+                join ur in queryRole on user.Id equals ur.ur.UserId into urs
+                from defaultUr in urs.DefaultIfEmpty()
+                select new {user, role = defaultUr} into users
+                group users by users.user into g
+                select new {User = g.Key, Roles = g.Select(u => u.role == null ? null : new {u.role.Id, u.role.Name, u.role.DisplayName})};
 
             var totalCount = await query.CountAsync();
             var items = await query.OrderBy(t => t.User.Id).PageBy(input).ToListAsync();
@@ -68,7 +65,7 @@ namespace MyCompany.MyProject.Users
                 items.Select(item =>
                 {
                     var dto = item.User.MapTo<UserDto>();
-                    dto.Roles = item.Roles.Select(d => new string[] { d.Id.ToString(), d.Name, d.DisplayName }).ToList();
+                    dto.Roles = item.Roles.Any(d => d != null) ? item.Roles.Select(d => new string[] { d.Id.ToString(), d.Name, d.DisplayName }).ToList() : new List<string[]>();
                     return dto;
                 }).ToList());
         }

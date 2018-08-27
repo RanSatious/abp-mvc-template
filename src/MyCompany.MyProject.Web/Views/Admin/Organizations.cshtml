@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.ActiveMenu = PageNames.Administration.OrganizationUnits;
+    ViewBag.JsPath = "app/admin/organization";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/node_modules/jstree/dist/themes/default/style.min.css" />
+    <style>
+      .jstree-contextmenu {
+        z-index: 1000;
+      }
+    </style>
+}
+<button class="layui-btn layui-btn-normal" id="btn-add" lay-filter="">新增</button>
+<hr>
+<div class="organization-container">
+</div>

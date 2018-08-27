@@ -8,9 +8,12 @@ requirejs.config({
   baseUrl: '/assets',
   paths: {
     main: 'app/main',
-    
+
     // core libary
     jquery: 'node_modules/jquery/dist/jquery.min',
+
+    // libray
+    jstree: 'node_modules/jstree/dist/jstree.min',
 
     // requireJs plugins
     depend: 'lib/requirejs-plugins/depend',

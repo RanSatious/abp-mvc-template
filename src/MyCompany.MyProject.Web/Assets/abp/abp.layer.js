@@ -88,4 +88,32 @@ define(['jquery', 'abp/abp.core', 'lay!layer'], function($, abp, layer) {
       document.activeElement.blur();
     });
   };
+
+  abp.notify.success = function(message, title, options) {
+    layer.msg(message, {
+      icon: 1,
+      time: 1000
+    });
+  };
+
+  abp.notify.info = function(message, title, options) {
+    layer.msg(message, {
+      icon: 6,
+      time: 1000
+    });
+  };
+
+  abp.notify.warn = function(message, title, options) {
+    layer.msg(message, {
+      icon: 0,
+      time: 1000
+    });
+  };
+
+  abp.notify.error = function(message, title, options) {
+    layer.msg(message, {
+      icon: 2,
+      time: 1000
+    });
+  };
 });

@@ -1,10 +1,8 @@
-define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'lay!laytpl'], function(main, modalView) {
-  console.log('role modal loaded');
+define(['main', 'text!/Views/Admin/_organizationModal.html', 'lay!form', 'lay!layer'], function(main, modalView) {
   var form = layui.form;
   var layer = layui.layer;
-  var laytpl = layui.laytpl;
 
-  var roleServices = abp.services.app.role;
+  var mainService = abp.services.app.organizationUnit;
 
   var modal = {
     index: 0,
@@ -15,10 +13,10 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
       modal.model = params.model;
       modal.callback = params.callback;
 
-      modal.isEdit && form.val('form-role', modal.model);
+      modal.isEdit && form.val('form-add', modal.model);
 
-      form.on('submit(addRole)', function(data) {
-        var action = modal.isEdit ? roleServices.update : roleServices.create;
+      form.on('submit(add)', function(data) {
+        var action = modal.isEdit ? mainService.updateOrganizationUnit : mainService.createOrganizationUnit;
         action(modal.normalize(data.field)).then(function(result) {
           modal.callback && modal.callback(result);
           layer.close(modal.index);
@@ -39,14 +37,15 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
       layer.close(modal.index);
     },
     normalize: function(data) {
-      return Object.assign({ isStatic: false, normalizedName: '', permissions: [] }, modal.model, data);
+      return Object.assign({}, modal.model, data);
     }
   };
 
   return {
-    create: function(callback) {
+    create: function(parentId, callback) {
       modal.isEdit = false;
       modal.open({
+        model: { parentId: parentId },
         callback: callback
       });
     },
