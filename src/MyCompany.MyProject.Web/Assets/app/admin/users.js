@@ -7,32 +7,36 @@ define(['main', 'app/admin/userModal', 'lib/table', 'lay!form'], function(main, 
 
   var roleService = abp.services.app.role;
   var roles = [];
-  roleService.getAll({ maxResultCount: 99 }).then(function(result) {
-    console.log(result);
+  roleService.getAll({ maxResultCount: 9999 }).then(function(result) {
     roles = result.items;
   });
+
+  var organizationService = abp.services.app.organizationUnit;
+  var organizations = [];
+  organizationService.getOrganizationUnits({}).then(function(result) {
+    organizations = result.items.map(function(item) {
+      return {
+        id: item.id,
+        code: item.code,
+        text: renderOrganizationText(item)
+      };
+    });
+  });
+
+  var renderOrganizationText = function(item) {
+    var iDepth = item.code.split('.').length - 1;
+    var text = item.displayName;
+    while (iDepth > 0) {
+      text = '　' + text;
+      iDepth--;
+    }
+    return text;
+  };
 
   table.render({
     elem: '#main-table',
     cellMinWidth: 80,
     url: '/api/services/app/user/GetAll',
-    method: 'POST',
-    contentType: 'application/json',
-    params: function(current, limit) {
-      return {
-        skipCount: (current - 1) * limit,
-        maxResultCount: limit
-      };
-    },
-    map: function(data) {
-      return {
-        code: 0,
-        msg: data.error,
-        count: data.result.totalCount,
-        data: data.result.items
-      };
-    },
-    page: true, //开启分页
     cols: [
       [
         { type: 'numbers' },
@@ -52,6 +56,7 @@ define(['main', 'app/admin/userModal', 'lib/table', 'lay!form'], function(main, 
       userModal.edit({
         model: data,
         roles: roles,
+        organizations: organizations,
         callback: function() {
           table.reload('main-table');
         }
@@ -80,6 +85,7 @@ define(['main', 'app/admin/userModal', 'lib/table', 'lay!form'], function(main, 
   $('#btn-add').click(function() {
     userModal.create({
       roles: roles,
+      organizations: organizations,
       callback: function() {
         table.reload('main-table');
       }

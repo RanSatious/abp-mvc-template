@@ -6,6 +6,12 @@ define(['main', 'app/admin/roleModal', 'lib/table', 'lay!form', '!lay!layer'], f
 
   var roleServices = abp.services.app.role;
 
+  var permissions = [];
+  roleServices.getAllPermissions().then(function(result) {
+    console.log(result);
+    permissions = result.items;
+  });
+
   table.render({
     id: 'main-table',
     elem: '#main-table',

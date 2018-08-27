@@ -17,6 +17,14 @@
     </div>
     {{# } }}
     <div class="layui-form-item">
+      <select name="interest" lay-filter="aihao" lay-verify="required">
+        <option value="">部门</option>
+        {{# layui.each(d.organizations, function(index, item){ }}
+        <option value="{{item.id}}">{{item.text}}</option>
+        {{# }); }}
+      </select>
+    </div>
+    <div class="layui-form-item">
       <input type="text" name="emailAddress" placeholder="电子邮箱" lay-verify="email" autocomplete="off" class="layui-input">
     </div>
     <div class="layui-form-item">
