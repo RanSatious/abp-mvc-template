@@ -1,7 +1,8 @@
-define(['main', 'app/admin/roleModal', 'lay!table', 'lay!form'], function(main, roleModal) {
+define(['main', 'app/admin/roleModal', 'lib/table', 'lay!form', '!lay!layer'], function(main, roleModal) {
   var $ = layui.$;
   var table = layui.table;
   var form = layui.form;
+  var layer = layui.layer;
 
   var roleServices = abp.services.app.role;
 
@@ -10,23 +11,6 @@ define(['main', 'app/admin/roleModal', 'lay!table', 'lay!form'], function(main, 
     elem: '#main-table',
     cellMinWidth: 80,
     url: '/api/services/app/role/GetAll',
-    method: 'POST',
-    contentType: 'application/json',
-    params: function(current, limit) {
-      return {
-        skipCount: (current - 1) * limit,
-        maxResultCount: limit
-      };
-    },
-    map: function(data) {
-      return {
-        code: 0,
-        msg: data.error,
-        count: data.result.totalCount,
-        data: data.result.items
-      };
-    },
-    page: true, //开启分页
     cols: [
       [
         { type: 'numbers' },
