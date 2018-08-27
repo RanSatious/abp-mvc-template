@@ -8,10 +8,6 @@ namespace MyCompany.MyProject.Authorization
     {
         public override void SetPermissions(IPermissionDefinitionContext context)
         {
-            context.CreatePermission(PermissionNames.Pages_Users, L("Users"));
-            context.CreatePermission(PermissionNames.Pages_Roles, L("Roles"));
-            context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
-
             var pages = context.GetPermissionOrNull(PermissionNames.Pages) ?? context.CreatePermission(PermissionNames.Pages, L("Pages"));
 
             pages.CreateChildPermission(PermissionNames.Pages_Home, L("Home"));
@@ -25,9 +21,6 @@ namespace MyCompany.MyProject.Authorization
 
             var dictionary = administration.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary, L("Dictionary"));
             dictionary.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary_Type, L("DictionaryType"));
-
-            administration.CreateChildPermission(PermissionNames.Pages_Administration_AuditLogs, L("AuditLogs"));
-            administration.CreateChildPermission(PermissionNames.Pages_Administration_Setting, L("Setting"));
         }
 
         private static ILocalizableString L(string name)
