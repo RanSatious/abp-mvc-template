@@ -9,20 +9,10 @@ namespace Ideayapai.Bridge.Health.Organizations
     {
         Task<ListResultDto<OrganizationUnitDto>> GetOrganizationUnits();
 
-        Task<PagedResultDto<OrganizationUnitUserListDto>> GetOrganizationUnitUsers(GetOrganizationUnitUsersInput input);
-
         Task<OrganizationUnitDto> CreateOrganizationUnit(CreateOrganizationUnitInput input);
 
         Task<OrganizationUnitDto> UpdateOrganizationUnit(UpdateOrganizationUnitInput input);
 
-        Task<OrganizationUnitDto> MoveOrganizationUnit(MoveOrganizationUnitInput input);
-
         Task DeleteOrganizationUnit(long id);
-
-        Task AddUserToOrganizationUnit(UserToOrganizationUnitInput input);
-
-        Task RemoveUserFromOrganizationUnit(UserToOrganizationUnitInput input);
-
-        Task<bool> IsInOrganizationUnit(UserToOrganizationUnitInput input);
     }
 }

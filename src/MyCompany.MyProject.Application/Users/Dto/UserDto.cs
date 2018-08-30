@@ -37,5 +37,7 @@ namespace MyCompany.MyProject.Users.Dto
         public DateTime CreationTime { get; set; }
 
         public List<string[]> Roles { get; set; }
+
+        public long? Organization { get; set; }
     }
 }

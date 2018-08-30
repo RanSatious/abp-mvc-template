@@ -45,7 +45,6 @@ define(['main', 'app/admin/roleModal', 'lib/table', 'lay!form', '!lay!layer'], f
   //监听工具条
   table.on('tool(role)', function(obj) {
     var data = obj.data;
-    console.log(obj);
     if (obj.event == 'edit') {
       roleModal.edit({
         model: data,

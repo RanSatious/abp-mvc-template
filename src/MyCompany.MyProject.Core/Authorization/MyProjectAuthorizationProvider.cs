@@ -18,9 +18,7 @@ namespace MyCompany.MyProject.Authorization
             administration.CreateChildPermission(PermissionNames.Pages_Administration_Users, L("Users"));
             administration.CreateChildPermission(PermissionNames.Pages_Administration_Roles, L("Roles"));
             administration.CreateChildPermission(PermissionNames.Pages_Administration_OrganizationUnits, L("OrganizationUnits"));
-
-            var dictionary = administration.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary, L("Dictionary"));
-            dictionary.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary_Type, L("DictionaryType"));
+            administration.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary, L("Dictionary"));
         }
 
         private static ILocalizableString L(string name)

@@ -12,7 +12,5 @@ namespace Ideayapai.Bridge.Health.Organizations.Dto
         public string Code { get; set; }
 
         public string DisplayName { get; set; }
-
-        public int MemberCount { get; set; }
     }
 }

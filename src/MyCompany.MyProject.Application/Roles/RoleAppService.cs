@@ -76,6 +76,9 @@ namespace MyCompany.MyProject.Roles
                 .Where(p => input.Permissions.Contains(p.Name))
                 .ToList();
 
+            // 须先删除所有权限再添加权限，否则SetGrantedPermissionsAsync不能正常工作
+            await _roleManager.ResetAllPermissionsAsync(role);
+            UnitOfWorkManager.Current.SaveChanges();
             await _roleManager.SetGrantedPermissionsAsync(role, grantedPermissions);
 
             return MapToEntityDto(role);
@@ -88,7 +91,7 @@ namespace MyCompany.MyProject.Roles
             var role = await _roleManager.FindByIdAsync(input.Id);
             if (role.IsStatic)
             {
-                throw new UserFriendlyException("CannotDeleteAStaticRole");
+                throw new UserFriendlyException(L("CannotDeleteAStaticRole"));
             }
 
             var users = await GetUsersInRoleAsync(role.Name);

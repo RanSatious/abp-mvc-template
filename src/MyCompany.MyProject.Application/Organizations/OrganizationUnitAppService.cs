@@ -8,9 +8,11 @@ using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
 using Abp.Organizations;
+using Abp.UI;
 using Ideayapai.Bridge.Health.Organizations.Dto;
 using MyCompany.MyProject;
 using MyCompany.MyProject.Authorization;
+using MyCompany.MyProject.Authorization.Users;
 
 namespace Ideayapai.Bridge.Health.Organizations
 {
@@ -19,55 +21,26 @@ namespace Ideayapai.Bridge.Health.Organizations
     {
         private readonly OrganizationUnitManager _organizationUnitManager;
         private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
-        private readonly IRepository<UserOrganizationUnit, long> _userOrganizationUnitRepository;
+        private readonly IRepository<User, long> _userRepository;
 
         public OrganizationUnitAppService(
             OrganizationUnitManager organizationUnitManager,
             IRepository<OrganizationUnit, long> organizationUnitRepository,
-            IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository)
+            IRepository<User, long> userRepository)
         {
             _organizationUnitManager = organizationUnitManager;
             _organizationUnitRepository = organizationUnitRepository;
-            _userOrganizationUnitRepository = userOrganizationUnitRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<ListResultDto<OrganizationUnitDto>> GetOrganizationUnits()
         {
-            var query =
-                from ou in _organizationUnitRepository.GetAll()
-                join uou in _userOrganizationUnitRepository.GetAll() on ou.Id equals uou.OrganizationUnitId into g
-                orderby ou.Code
-                select new { ou, memberCount = g.Count() };
-
-            var items = await query.ToListAsync();
+            var items = await _organizationUnitRepository.GetAll().ToListAsync();
 
             return new ListResultDto<OrganizationUnitDto>(
                 items.Select(item =>
                 {
-                    var dto = item.ou.MapTo<OrganizationUnitDto>();
-                    dto.MemberCount = item.memberCount;
-                    return dto;
-                }).ToList());
-        }
-
-        public async Task<PagedResultDto<OrganizationUnitUserListDto>> GetOrganizationUnitUsers(GetOrganizationUnitUsersInput input)
-        {
-            var query = from uou in _userOrganizationUnitRepository.GetAll()
-                join ou in _organizationUnitRepository.GetAll() on uou.OrganizationUnitId equals ou.Id
-                join user in UserManager.Users on uou.UserId equals user.Id
-                where uou.OrganizationUnitId == input.Id
-                orderby input.Sorting
-                select new { uou, user };
-
-            var totalCount = await query.CountAsync();
-            var items = await query.PageBy(input).ToListAsync();
-
-            return new PagedResultDto<OrganizationUnitUserListDto>(
-                totalCount,
-                items.Select(item =>
-                {
-                    var dto = item.user.MapTo<OrganizationUnitUserListDto>();
-                    dto.AddedTime = item.uou.CreationTime;
+                    var dto = item.MapTo<OrganizationUnitDto>();
                     return dto;
                 }).ToList());
         }
@@ -90,43 +63,21 @@ namespace Ideayapai.Bridge.Health.Organizations
 
             await _organizationUnitManager.UpdateAsync(organizationUnit);
 
-            return await CreateOrganizationUnitDto(organizationUnit);
-        }
-
-        public async Task<OrganizationUnitDto> MoveOrganizationUnit(MoveOrganizationUnitInput input)
-        {
-            await _organizationUnitManager.MoveAsync(input.Id, input.NewParentId);
-
-            return await CreateOrganizationUnitDto(
-                await _organizationUnitRepository.GetAsync(input.Id)
-            );
+            return organizationUnit.MapTo<OrganizationUnitDto>();
         }
 
         public async Task DeleteOrganizationUnit(long id)
         {
+            if (await IsOrganizationInUse(id))
+            {
+                throw new UserFriendlyException(L("Err_OrganizationInUse"));
+            }
             await _organizationUnitManager.DeleteAsync(id);
         }
 
-        public async Task AddUserToOrganizationUnit(UserToOrganizationUnitInput input)
+        protected async Task<bool> IsOrganizationInUse(long id)
         {
-            await UserManager.AddToOrganizationUnitAsync(input.UserId, input.OrganizationUnitId);
-        }
-
-        public async Task RemoveUserFromOrganizationUnit(UserToOrganizationUnitInput input)
-        {
-            await UserManager.RemoveFromOrganizationUnitAsync(input.UserId, input.OrganizationUnitId);
-        }
-
-        public async Task<bool> IsInOrganizationUnit(UserToOrganizationUnitInput input)
-        {
-            return await UserManager.IsInOrganizationUnitAsync(input.UserId, input.OrganizationUnitId);
-        }
-
-        private async Task<OrganizationUnitDto> CreateOrganizationUnitDto(OrganizationUnit organizationUnit)
-        {
-            var dto = organizationUnit.MapTo<OrganizationUnitDto>();
-            dto.MemberCount = await _userOrganizationUnitRepository.CountAsync(uou => uou.OrganizationUnitId == organizationUnit.Id);
-            return dto;
+            return await _userRepository.CountAsync(d => d.Organization == id) > 0;
         }
     }
 }

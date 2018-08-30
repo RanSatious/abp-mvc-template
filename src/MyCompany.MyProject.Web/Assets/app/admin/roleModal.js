@@ -21,7 +21,6 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
       modal.callback = params.callback;
 
       modal.initTree();
-      console.log(modal.permissions);
       modal.isEdit && form.val('form-role', modal.model);
 
       form.on('submit(addRole)', function(data) {
@@ -40,6 +39,14 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
         },
         plugins: ['checkbox']
       });
+      $('.permissions-container').on('ready.jstree', function(e, data) {
+        if (modal.isEdit) {
+          var tree = $('.permissions-container').jstree(true);
+          modal.filterParent(modal.model.permissions).forEach(function(item) {
+            tree.select_node(item);
+          });
+        }
+      });
     },
     open: function(params) {
       modal.index = layer.open({
@@ -54,7 +61,41 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
       layer.close(modal.index);
     },
     normalize: function(data) {
-      return Object.assign({ isStatic: false, normalizedName: '', permissions: [] }, modal.model, data);
+      var item = Object.assign({ isStatic: false, normalizedName: '', permissions: [] }, modal.model, data);
+      var permissions = [];
+      var tree = $('.permissions-container').jstree(true);
+      tree.get_selected().forEach(function(item, index) {
+        if (permissions.indexOf(item) == -1) {
+          permissions.push(item);
+
+          var node = tree.get_node(item);
+          node.parents.forEach(function(parent) {
+            if (permissions.indexOf(parent) == -1 && parent != '#') {
+              permissions.push(parent);
+            }
+          });
+        }
+      });
+      permissions.sort();
+      console.log(permissions);
+      item.permissions = permissions;
+      return item;
+    },
+    filterParent: function(permissions) {
+      permissions.sort();
+      var filterPermissions = {};
+      permissions.forEach(function(item, index) {
+        filterPermissions[item] = item;
+
+        var parents = item.split('.');
+        parents.pop();
+        var parent = parents.join('.');
+
+        if (filterPermissions[parent]) {
+          delete filterPermissions[parent];
+        }
+      });
+      return Object.keys(filterPermissions);
     }
   };
 

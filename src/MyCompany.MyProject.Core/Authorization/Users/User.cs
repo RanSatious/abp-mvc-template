@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Abp.Authorization.Users;
 using Abp.Extensions;
 using Microsoft.AspNet.Identity;
@@ -28,5 +29,7 @@ namespace MyCompany.MyProject.Authorization.Users
 
             return user;
         }
+
+        public long? Organization { get; set; }
     }
 }

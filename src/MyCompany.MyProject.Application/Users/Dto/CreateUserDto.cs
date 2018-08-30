@@ -34,5 +34,7 @@ namespace MyCompany.MyProject.Users.Dto
         [StringLength(AbpUserBase.MaxPlainPasswordLength)]
         [DisableAuditing]
         public string Password { get; set; }
+
+        public long Organization { get; set; }
     }
 }

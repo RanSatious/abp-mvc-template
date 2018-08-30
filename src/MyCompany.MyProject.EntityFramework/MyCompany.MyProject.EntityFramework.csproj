@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201808160143360_InitialMigration.Designer.cs">
       <DependentUpon>201808160143360_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808300547210_Update_User_Add_Organization.cs" />
+    <Compile Include="Migrations\201808300547210_Update_User_Add_Organization.Designer.cs">
+      <DependentUpon>201808300547210_Update_User_Add_Organization.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AbpZeroDbMigrator.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyProjectDataModule.cs" />
@@ -248,6 +252,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808160143360_InitialMigration.resx">
       <DependentUpon>201808160143360_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808300547210_Update_User_Add_Organization.resx">
+      <DependentUpon>201808300547210_Update_User_Add_Organization.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
