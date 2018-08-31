@@ -5,7 +5,7 @@ using MyCompany.MyProject.Roles.Dto;
 
 namespace MyCompany.MyProject.Roles
 {
-    public interface IRoleAppService : IAsyncCrudAppService<RoleDto, int, PagedResultRequestDto, CreateRoleDto, RoleDto>
+    public interface IRoleAppService : IAsyncCrudAppService<RoleDto, int, PagedAndSortedResultRequestDto, CreateRoleDto, RoleDto>
     {
         Task<ListResultDto<PermissionDto>> GetAllPermissions();
     }

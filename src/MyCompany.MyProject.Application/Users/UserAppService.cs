@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
@@ -18,6 +19,7 @@ using MyCompany.MyProject.Authorization.Users;
 using MyCompany.MyProject.Roles.Dto;
 using MyCompany.MyProject.Users.Dto;
 using Microsoft.AspNet.Identity;
+using Abp.Organizations;
 
 namespace MyCompany.MyProject.Users
 {
@@ -28,13 +30,15 @@ namespace MyCompany.MyProject.Users
         private readonly RoleManager _roleManager;
         private readonly IRepository<Role> _roleRepository;
         private readonly IRepository<UserRole, long> _userRoleRepository;
+        private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
 
         public UserAppService(
             IRepository<User, long> repository, 
             UserManager userManager, 
             IRepository<Role> roleRepository, 
             RoleManager roleManager,
-            IRepository<UserRole, long> userRoleRepository)
+            IRepository<UserRole, long> userRoleRepository,
+            IRepository<OrganizationUnit, long> organizationUnitRepository)
             : base(repository)
         {
             _userManager = userManager;
@@ -42,6 +46,7 @@ namespace MyCompany.MyProject.Users
             _roleManager = roleManager;
 
             _userRoleRepository = userRoleRepository;
+            _organizationUnitRepository = organizationUnitRepository;
         }
 
         public override async Task<PagedResultDto<UserDto>> GetAll(UserGetAllInput input)
@@ -51,14 +56,16 @@ namespace MyCompany.MyProject.Users
                             select new { ur, role.Name, role.DisplayName, role.Id };
 
             var query = from user in CreateFilteredQuery(input)
+                join org in _organizationUnitRepository.GetAll() on user.Organization equals org.Id into orgs
+                from defaultOrg in orgs.DefaultIfEmpty()
                 join ur in queryRole on user.Id equals ur.ur.UserId into urs
                 from defaultUr in urs.DefaultIfEmpty()
-                select new {user, role = defaultUr} into users
+                select new {user, role = defaultUr, organization = defaultOrg} into users
                 group users by users.user into g
-                select new {User = g.Key, Roles = g.Select(u => u.role == null ? null : new {u.role.Id, u.role.Name, u.role.DisplayName})};
+                select new {User = g.Key, Roles = g.Select(u => u.role == null ? null : new {u.role.Id, u.role.Name, u.role.DisplayName}), Organization = g.Select(u => u.organization).FirstOrDefault()};
 
             var totalCount = await query.CountAsync();
-            var items = await query.OrderBy(t => t.User.Id).PageBy(input).ToListAsync();
+            var items = await query.OrderBy(d => d.User.Id).PageBy(input).ToListAsync();
 
             return new PagedResultDto<UserDto>(
                 totalCount,
@@ -66,6 +73,7 @@ namespace MyCompany.MyProject.Users
                 {
                     var dto = item.User.MapTo<UserDto>();
                     dto.Roles = item.Roles.Any(d => d != null) ? item.Roles.Select(d => new string[] { d.Id.ToString(), d.Name, d.DisplayName }).ToList() : new List<string[]>();
+                    dto.OrganizationName = item.Organization?.DisplayName;
                     return dto;
                 }).ToList());
         }
@@ -157,7 +165,7 @@ namespace MyCompany.MyProject.Users
 
         protected override IQueryable<User> ApplySorting(IQueryable<User> query, UserGetAllInput input)
         {
-            return query.OrderBy(r => r.UserName);
+            return query.OrderBy(input.Sorting);
         }
 
         protected virtual void CheckErrors(IdentityResult identityResult)

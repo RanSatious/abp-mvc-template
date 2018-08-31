@@ -39,5 +39,7 @@ namespace MyCompany.MyProject.Users.Dto
         public List<string[]> Roles { get; set; }
 
         public long? Organization { get; set; }
+
+        public string OrganizationName { get; set; }
     }
 }

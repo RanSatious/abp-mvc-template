@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
@@ -17,7 +18,7 @@ using Microsoft.AspNet.Identity;
 namespace MyCompany.MyProject.Roles
 {
     [AbpAuthorize(PermissionNames.Pages_Administration_Roles)]
-    public class RoleAppService : AsyncCrudAppService<Role, RoleDto, int, PagedResultRequestDto, CreateRoleDto, RoleDto>, IRoleAppService
+    public class RoleAppService : AsyncCrudAppService<Role, RoleDto, int, PagedAndSortedResultRequestDto, CreateRoleDto, RoleDto>, IRoleAppService
     {
         private readonly RoleManager _roleManager;
         private readonly UserManager _userManager;
@@ -124,7 +125,7 @@ namespace MyCompany.MyProject.Roles
             ));
         }
 
-        protected override IQueryable<Role> CreateFilteredQuery(PagedResultRequestDto input)
+        protected override IQueryable<Role> CreateFilteredQuery(PagedAndSortedResultRequestDto input)
         {
             return Repository.GetAllIncluding(x => x.Permissions);
         }
@@ -135,9 +136,9 @@ namespace MyCompany.MyProject.Roles
             return Task.FromResult(role);
         }
 
-        protected override IQueryable<Role> ApplySorting(IQueryable<Role> query, PagedResultRequestDto input)
+        protected override IQueryable<Role> ApplySorting(IQueryable<Role> query, PagedAndSortedResultRequestDto input)
         {
-            return query.OrderBy(r => r.DisplayName);
+            return string.IsNullOrEmpty(input.Sorting) ? query.OrderBy(d => d.Name) : query.OrderBy(input.Sorting);
         }
 
         protected virtual void CheckErrors(IdentityResult identityResult)
