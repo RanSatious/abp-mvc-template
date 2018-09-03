@@ -63,6 +63,22 @@ namespace MyCompany.MyProject.Web
                             requiredPermissionName: PermissionNames.Pages_Administration_OrganizationUnits
                         )
                     )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        PageNames.Sample.Index,
+                        L("Sample"),
+                        url: "Sample",
+                        icon: "",
+                        requiresAuthentication: true
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            PageNames.Sample.Table,
+                            L("Table"),
+                            url: "Sample/Table",
+                            icon: "",
+                            requiresAuthentication: true
+                        )
+                    )
                 );
         }
 

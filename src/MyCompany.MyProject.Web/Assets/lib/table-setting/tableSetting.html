@@ -1,0 +1,13 @@
+<div class="setting-container">
+  <div class="setting-slider">
+    <button class="layui-btn layui-btn-disabled" id="btn-up" disabled>↑</button>
+    <button class="layui-btn layui-btn-disabled" id="btn-down" disabled>↓</button>
+  </div>
+  <div class="setting-body">
+    {{# layui.each(d.model, function(index, item){ }}
+    <p data-index="{{index}}">{{item.title}}</p> {{# }); }}
+  </div>
+</div>
+<div class="setting-footer">
+  <button class="layui-btn layui-btn-normal" id="btn-save">确定</button>
+</div>

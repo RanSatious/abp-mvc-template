@@ -18,5 +18,11 @@ namespace MyCompany.MyProject.Web
             public const string OrganizationUnits = "Administration.OrganizationUnits";
             public const string Dictionary = "Administration.Dictionary";
         }
+
+        public static class Sample
+        {
+            public const string Index = "Sample";
+            public const string Table = "Sample.Table";
+        }
     }
 }

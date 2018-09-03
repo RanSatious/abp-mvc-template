@@ -1,0 +1,40 @@
+.setting-container {
+  padding: 5px;
+}
+.setting-slider .layui-btn {
+  display: block;
+  margin: 5px 0;
+}
+.setting-body {
+  margin-right: 50px;
+}
+.setting-body p {
+  margin: 5px;
+  padding: 5px;
+  background-color: #ccc;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.setting-body p.active,
+.setting-body p:hover {
+  background-color: #009688;
+  color: #fff;
+}
+
+.setting-slider {
+  float: right;
+}
+
+.setting-footer {
+  height: 50px;
+  padding: 5px;
+  text-align: center;
+}
+
+.layui-btn-disabled,
+.layui-btn-disabled:active,
+.layui-btn-disabled:hover {
+  border: none;
+  background-color: #e2e2e2;
+}
