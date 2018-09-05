@@ -21,6 +21,9 @@ namespace MyCompany.MyProject.Authorization
 
             var dictionary = administration.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary, L("Dictionary"));
             dictionary.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary_Type, L("DictionaryType"));
+            dictionary.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary_Create, L("CreateDictionary"));
+            dictionary.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary_Delete, L("DeleteDictionary"));
+            dictionary.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary_Edit, L("EditDictionary"));
 
             administration.CreateChildPermission(PermissionNames.Pages_Administration_AuditLogs, L("AuditLogs"));
             administration.CreateChildPermission(PermissionNames.Pages_Administration_Setting, L("Setting"));

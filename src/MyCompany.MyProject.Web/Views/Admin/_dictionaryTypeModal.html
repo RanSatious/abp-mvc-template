@@ -1,0 +1,35 @@
+﻿<div class="modal-container">
+    <form class="layui-form add-type">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <input type="text" name="dictionaryTypeName" placeholder="名称" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-inline">
+                <input type="text" name="showName" placeholder="显示名称" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adddictionaryType">添加</button>
+            </div>
+        </div>
+    </form>
+    <form class="layui-form layui-hide edit-type">
+        <input type="hidden" name="id" />
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <input type="text" name="input-edit-name" placeholder="名称" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-inline">
+                <input type="text" name="input-edit-displayName" placeholder="显示名称" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="updatedictionaryType">保存</button>
+                <button class="layui-btn layui-btn-primary" lay-submit lay-filter="caceldictionaryType">取消</button>
+            </div>
+        </div>
+    </form>
+</div>
+<table id="main-table2" lay-filter="dictionary"></table>
+<script type="text/html" id="actionDictionaryTpl">
+    <button class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</button>
+    <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</button>
+</script>

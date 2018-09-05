@@ -63,6 +63,13 @@ namespace MyCompany.MyProject.Web
                             requiredPermissionName: PermissionNames.Pages_Administration_OrganizationUnits
                         )
                     )
+                    .AddItem(new MenuItemDefinition(
+                        PageNames.Administration.Dictionary,
+                        L("Dictionary"),
+                        url: "Admin/Dictionary",
+                        icon: "",
+                        requiredPermissionName: PermissionNames.Pages_Administration_Dictionary
+                        ))
                 ).AddItem(
                     new MenuItemDefinition(
                         PageNames.Sample.Index,
