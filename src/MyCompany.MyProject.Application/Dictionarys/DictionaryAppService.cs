@@ -21,9 +21,9 @@ namespace MyCompany.MyProject.Dictionarys
     {
         public DictionaryAppService(IRepository<DictionaryItem, long> repository) : base(repository)
         {
-            CreatePermissionName = PermissionNames.Pages_Administration_Dictionary_Create;
-            UpdatePermissionName = PermissionNames.Pages_Administration_Dictionary_Edit;
-            DeletePermissionName = PermissionNames.Pages_Administration_Dictionary_Delete;
+            CreatePermissionName = PermissionNames.Pages_Administration_Dictionary;
+            UpdatePermissionName = PermissionNames.Pages_Administration_Dictionary;
+            DeletePermissionName = PermissionNames.Pages_Administration_Dictionary;
         }
 
         protected override IQueryable<DictionaryItem> CreateFilteredQuery(PagedSortedAndFilteredInputDto input)

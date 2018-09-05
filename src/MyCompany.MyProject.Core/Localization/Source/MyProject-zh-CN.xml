@@ -25,7 +25,7 @@
     <text name="Admin" value="系统" />
     <text name="Profile" value="文件"></text>
     <text name="About" value="关于我们" />
-    <text name="WellcomeMessage" value="欢迎使用 Bridge!" />
+    <text name="WellcomeMessage" value="欢迎使用 MyProject!" />
 
     <text name="FormIsNotValidMessage" value="部分输入信息不符合要求,请检查并改正." />
     <text name="TenantNameCanNotBeEmpty" value="租户名不能为空" />
@@ -81,20 +81,7 @@
     <text name="ManagingOrganizationTree" value="管理组织机构" />
     <text name="ManagingMembers" value="成员管理" />
 
-
-    <text name="CreateDictionary" value="新建字典" />
-    <text name="EditDictionary" value="编辑字典" />
-    <text name="DeleteDictionary" value="删除字典" />
-    <text name="DictionaryType" value="字典类型管理" />
-
     <text name="Basic" value="基本消息" />
-    <text name="ESType" value="监测" />
-
-    <text name="BridgeOverview" value="桥梁概况" />
-    <text name="BridgeFace" value="桥梁界面" />
-    <text name="BridgeSensor" value="桥梁传感器" />
-    <text name="SensorWarning" value="传感器告警" />
-
 
     <text name="Status" value="状态" />
     <text name="Message" value="消息" />
@@ -138,38 +125,6 @@
     <text name="AddRole" value="添加角色" />
     <text name="EditRole" value="编辑角色" />
 
-    <text name="Personal" value="个人" />
-    <text name="Environment" value="环境" />
-    <text name="Structure" value="结构" />
-    <text name="Monitor" value="监测" />
-    <text name="Video" value="视频" />
-    <text name="Evaluation" value="评估" />
-    <text name="Report" value="处理" />
-    <text name="Setting" value="设置" />
-    <text name="Index" value="首页" />
-
-    <!--桥梁设置菜单-->
-    <text name="BridgeSetting" value="桥梁设置" />
-    <text name="BridgeInformation" value="桥梁基本信息" />
-    <text name="UpdateBasic" value="修改桥梁基本信息" />
-    <text name="BridgeEnvironment" value="桥梁环境管理" />
-    <text name="BridgeStructure" value="桥梁结构管理" />
-    <text name="BridgeESTyle" value="环境结构类别管理" />
-    <text name="BridgeVideo" value="视频管理" />
-    <text name="SensorUnit" value="传感器类型单位设置" />
-    <text name="BridgeMonitor" value="监测参数设置" />
-    <text name="Overview" value="立体图设计" />
-    <text name="Faceview" value="截面图设计" />
-    <text name="Sensorview" value="传感器设计" />
-    <text name="Warningview" value="预警设置" />
-    <text name="Sensor" value="传输参数及状态" />
-    <text name="Abnormal records" value="传输异常报警记录" />
-    <text name="Abnormal Settings" value="传输异常报警设置" />
-    <text name="Abnormal Sensor" value="传感器传输状态" />
-    <text name="CheckSensor" value="手动检查传感器状态" />
-    <text name="TimeInterval" value="采样时间间隔设置" />
-    <text name="Manage" value="全桥评估管理" />
-
     <!--系统设置菜单-->
     <text name="SystemSetting" value="系统参数" />
     <text name="Bridge" value="桥梁" />
@@ -184,7 +139,6 @@
     <text name="SenorSetting" value="传感器类型设置" />
 
     <!--错误消息-->
-    <text name="Err_BridgeAuthorize" value="无桥梁权限" />
     <text name="Err_Arguments" value="参数错误" />
     <text name="Err_Name_In_Use" value="名称已被使用" />
     <text name="Err_Type_In_Use" value="类型使用中" />

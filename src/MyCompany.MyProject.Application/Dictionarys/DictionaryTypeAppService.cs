@@ -19,9 +19,9 @@ namespace MyCompany.MyProject.Dictionarys
     {
         public DictionaryTypeAppService(IRepository<DictionaryType, long> repository) : base(repository)
         {
-            CreatePermissionName = PermissionNames.Pages_Administration_Dictionary_Type;
-            UpdatePermissionName = PermissionNames.Pages_Administration_Dictionary_Type;
-            DeletePermissionName = PermissionNames.Pages_Administration_Dictionary_Type;
+            CreatePermissionName = PermissionNames.Pages_Administration_Dictionary;
+            UpdatePermissionName = PermissionNames.Pages_Administration_Dictionary;
+            DeletePermissionName = PermissionNames.Pages_Administration_Dictionary;
         }
 
         public override Task<DictionaryTypeDto> Create(DictionaryTypeInput input)
