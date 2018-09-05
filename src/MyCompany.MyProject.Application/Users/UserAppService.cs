@@ -146,7 +146,10 @@ namespace MyCompany.MyProject.Users
             var user = ObjectMapper.Map<User>(createInput);
             return user;
         }
-
+        public async Task<IdentityResult> ChangePassword(ChangePasswordDto input)
+        {
+            return await _userManager.ChangePasswordAsync(input.Id, input.OldPassword, input.NewPassword);
+        }
         protected override void MapToEntity(UpdateUserDto input, User user)
         {
             ObjectMapper.Map(input, user);

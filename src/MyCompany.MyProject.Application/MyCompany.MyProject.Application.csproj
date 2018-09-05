@@ -265,6 +265,7 @@
     <Compile Include="Roles\Dto\PermissionDto.cs" />
     <Compile Include="Roles\Dto\RoleDto.cs" />
     <Compile Include="Roles\IRoleAppService.cs" />
+    <Compile Include="Users\Dto\ChangePasswordDto.cs" />
     <Compile Include="Users\Dto\CreateUserDto.cs" />
     <Compile Include="Users\Dto\UpdateUserDto.cs" />
     <Compile Include="Users\Dto\UserDto.cs" />
