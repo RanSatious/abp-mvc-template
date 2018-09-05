@@ -218,6 +218,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConsts.cs" />
+    <Compile Include="Dictionarys\DictionaryAppService.cs" />
+    <Compile Include="Dictionarys\DictionaryTypeAppService.cs" />
+    <Compile Include="Dictionarys\Dto\CreateDictionaryItemInput.cs" />
+    <Compile Include="Dictionarys\Dto\DictionaryItemDto.cs" />
+    <Compile Include="Dictionarys\Dto\DictionaryTypeDto.cs" />
+    <Compile Include="Dictionarys\Dto\DictionaryTypeInput.cs" />
+    <Compile Include="Dictionarys\IDictionaryAppService.cs" />
+    <Compile Include="Dictionarys\IDictionaryTypeAppService.cs" />
     <Compile Include="Dto\EntityNullableDto.cs" />
     <Compile Include="Dto\PagedAndFilteredInputDto.cs" />
     <Compile Include="Dto\PagedAndSortedInputDto.cs" />
@@ -242,6 +250,7 @@
     <Compile Include="MultiTenancy\Dto\TenantDto.cs" />
     <Compile Include="MultiTenancy\ITenantAppService.cs" />
     <Compile Include="MultiTenancy\TenantAppService.cs" />
+    <Compile Include="MyProjectAsyncCurdAppServiceBase.cs" />
     <Compile Include="Organizations\Dto\CreateOrganizationUnitInput.cs" />
     <Compile Include="Organizations\Dto\GetOrganizationUnitUsersInput.cs" />
     <Compile Include="Organizations\Dto\MoveOrganizationUnitInput.cs" />

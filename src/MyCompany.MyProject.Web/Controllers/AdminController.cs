@@ -32,5 +32,11 @@ namespace MyCompany.MyProject.Web.Controllers
         {
             return View();
         }
+
+        [AbpMvcAuthorize(PermissionNames.Pages_Administration_Dictionary)]
+        public ActionResult Dictionary()
+        {
+            return View();
+        }
     }
 }

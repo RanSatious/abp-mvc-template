@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="zh-CN">
   <texts>
+    <text name="Yes" value="是" />
+    <text name="No" value="否" />
+    <text name="Ok" value="确定" />
+    <text name="Save" value="保存" />
+    <text name="Cancel" value="取消" />
+    <text name="New" value="新建" />
+    <text name="Add" value="添加" />
+    <text name="Create" value="创建" />
+    <text name="Edit" value="编辑" />
+    <text name="Delete" value="删除" />
+    <text name="Optional" value="可选的" />
+    <text name="Detail" value="信息" />
+    <text name="Details" value="信息" />
+    <text name="Info" value="消息" />
+    <text name="Warning" value="警告" />
+    <text name="Error" value="错误" />
+    <text name="Confirm" value="确定" />
+    <text name="Success" value="成功" />
+    <text name="Fail" value="失败" />
+
     <text name="HomePage" value="主页" />
+    <text name="Admin" value="系统" />
+    <text name="Profile" value="文件"></text>
     <text name="About" value="关于我们" />
-    <text name="WellcomeMessage" value="欢迎使用 MyProject!" />
+    <text name="WellcomeMessage" value="欢迎使用 Bridge!" />
 
     <text name="FormIsNotValidMessage" value="部分输入信息不符合要求,请检查并改正." />
     <text name="TenantNameCanNotBeEmpty" value="租户名不能为空" />
@@ -18,6 +40,7 @@
     <text name="TenancyName" value="租户名称" />
     <text name="UserNameOrEmail" value="用户名或邮箱地址" />
     <text name="Password" value="密码" />
+    <text name="ConfirmPassword" value="确认密码" />
     <text name="RememberMe" value="记住我" />
     <text name="LogIn" value="登录" />
 
@@ -29,12 +52,59 @@
     <text name="Surname" value="姓" />
     <text name="EmailAddress" value="邮箱地址" />
 
+
+    <!--AuditLogs-->
+    <text name="ServiceName" value="服务接口" />
+    <text name="MethodName" value="方法名" />
+    <text name="Parameters" value="参数" />
+    <text name="ExecutionTime" value="执行时间" />
+    <text name="ExecutionDuration" value="时间间隔" />
+    <text name="Ip" value="客户端IP" />
+    <text name="Computer" value="客户端名称" />
+    <text name="BrowserName" value="浏览器名" />
+
+    <!--权限-->
+    <text name="Pages" value="首页" />
+    <text name="EditSetting" value="编辑设置" />
+    <text name="AccountManage" value="账户管理" />
+    <text name="CreatingNewRole" value="创建角色" />
+    <text name="EditingRole" value="编辑角色" />
+    <text name="DeletingRole" value="删除角色" />
+    <text name="CreatingNewUser" value="创建新用户" />
+    <text name="EditingUser" value="编辑用户" />
+    <text name="DeletingUser" value="删除用户" />
+    <text name="ChangingPermissions" value="编辑权限" />
+    <text name="LoginForUsers" value="用户登录" />
+    <text name="ResetPassword" value="密码重置" />
+
+    <text name="OrganizationUnits" value="组织机构" />
+    <text name="ManagingOrganizationTree" value="管理组织机构" />
+    <text name="ManagingMembers" value="成员管理" />
+
+
+    <text name="CreateDictionary" value="新建字典" />
+    <text name="EditDictionary" value="编辑字典" />
+    <text name="DeleteDictionary" value="删除字典" />
+    <text name="DictionaryType" value="字典类型管理" />
+
+    <text name="Basic" value="基本消息" />
+    <text name="ESType" value="监测" />
+
+    <text name="BridgeOverview" value="桥梁概况" />
+    <text name="BridgeFace" value="桥梁界面" />
+    <text name="BridgeSensor" value="桥梁传感器" />
+    <text name="SensorWarning" value="传感器告警" />
+
+
+    <text name="Status" value="状态" />
+    <text name="Message" value="消息" />
+    <text name="Config" value="配置" />
+
     <text name="Tenants" value="租户" />
     <text name="SavedSuccessfully" value="保存成功" />
     <text name="CreateNewTenant" value="创建新租户" />
     <text name="AdminEmailAddress" value="管理员邮箱地址" />
-    <text name="Save" value="保存" />
-    <text name="Cancel" value="取消" />
+
     <text name="TenantName_Regex_Description" value="租户名至少2个字符,以字母开头后跟字母,数字,横线或下划线." />
     <text name="DefaultPasswordIs" value="默认密码为 {0}" />
     <text name="CanBeEmptyToLoginAsHost" value="留空以主租户登录." />
@@ -48,12 +118,86 @@
     <text name="RegisterFormUserNameInvalidMessage">请不要在用户名中输入邮箱地址.</text>
 
     <text name="DatabaseConnectionString" value="数据库连接串" />
+
+    <text name="User" value="用户" />
     <text name="Users" value="用户" />
+    <text name="AddUser" value="添加用户" />
+    <text name="EditUser" value="编辑用户" />
+    <text name="UserInfo" value="个人信息" />
     <text name="IsActive" value="是否激活" />
     <text name="FullName" value="姓名" />
     <text name="CreateNewUser" value="创建新用户" />
-    <text name="Yes" value="是" />
-    <text name="No" value="否" />
-    <text name="Optional" value="可选的" />
+
+    <text name="Roles" value="角色" />
+    <text name="RoleName" value="角色名" />
+    <text name="RoleDisplayName" value="表示名" />
+    <text name="RoleDescription" value="说明" />
+    <text name="CreateNewRole" value="创建新角色" />
+    <text name="Permissions" value="权限" />
+
+    <text name="AddRole" value="添加角色" />
+    <text name="EditRole" value="编辑角色" />
+
+    <text name="Personal" value="个人" />
+    <text name="Environment" value="环境" />
+    <text name="Structure" value="结构" />
+    <text name="Monitor" value="监测" />
+    <text name="Video" value="视频" />
+    <text name="Evaluation" value="评估" />
+    <text name="Report" value="处理" />
+    <text name="Setting" value="设置" />
+    <text name="Index" value="首页" />
+
+    <!--桥梁设置菜单-->
+    <text name="BridgeSetting" value="桥梁设置" />
+    <text name="BridgeInformation" value="桥梁基本信息" />
+    <text name="UpdateBasic" value="修改桥梁基本信息" />
+    <text name="BridgeEnvironment" value="桥梁环境管理" />
+    <text name="BridgeStructure" value="桥梁结构管理" />
+    <text name="BridgeESTyle" value="环境结构类别管理" />
+    <text name="BridgeVideo" value="视频管理" />
+    <text name="SensorUnit" value="传感器类型单位设置" />
+    <text name="BridgeMonitor" value="监测参数设置" />
+    <text name="Overview" value="立体图设计" />
+    <text name="Faceview" value="截面图设计" />
+    <text name="Sensorview" value="传感器设计" />
+    <text name="Warningview" value="预警设置" />
+    <text name="Sensor" value="传输参数及状态" />
+    <text name="Abnormal records" value="传输异常报警记录" />
+    <text name="Abnormal Settings" value="传输异常报警设置" />
+    <text name="Abnormal Sensor" value="传感器传输状态" />
+    <text name="CheckSensor" value="手动检查传感器状态" />
+    <text name="TimeInterval" value="采样时间间隔设置" />
+    <text name="Manage" value="全桥评估管理" />
+
+    <!--系统设置菜单-->
+    <text name="SystemSetting" value="系统参数" />
+    <text name="Bridge" value="桥梁" />
+    <text name="BridgeStatus" value="桥梁状态" />
+    <text name="SensorType" value="传感器类型" />
+    <text name="Organization" value="部门" />
+    <text name="Dictionary" value="字典" />
+    <text name="AuditLogs" value="日志" />
+    <text name="HangFire" value="后台作业" />
+    <text name="Statistics" value="统计汇总" />
+    <text name="SimpleMail" value="站内信" />
+    <text name="SenorSetting" value="传感器类型设置" />
+
+    <!--错误消息-->
+    <text name="Err_BridgeAuthorize" value="无桥梁权限" />
+    <text name="Err_Arguments" value="参数错误" />
+    <text name="Err_Name_In_Use" value="名称已被使用" />
+    <text name="Err_Type_In_Use" value="类型使用中" />
+    <text name="Err_Item_In_Use" value="项目使用中" />
+    <text name="Err_DictionaryItem_In_Use" value="{0}使用中" />
+    <text name="Err_Type_Not_Found" value="类型未找到" />
+    <text name="Err_Only_Xls_File" value="请上传正确的Excel文件格式,其后缀名为xls,xlsx" />
+    <text name="Err_No_Config" value="桥梁设置未找到" />
+    <text name="Err_BridgeInUse" value="桥梁使用中" />
+    <text name="Err_FaceInUse" value="截面使用中" />
+    <text name="Err_SensorInUse" value="传感器使用中" />
+    <text name="Err_ReportInUse" value="报告使用中" />
+    <text name="Err_Verification_Invalid" value="请输入有效的验证码" />
+    <text name="Err_Verification_Used" value="验证码已被使用" />
   </texts>
 </localizationDictionary>

@@ -18,7 +18,12 @@ namespace MyCompany.MyProject.Authorization
             administration.CreateChildPermission(PermissionNames.Pages_Administration_Users, L("Users"));
             administration.CreateChildPermission(PermissionNames.Pages_Administration_Roles, L("Roles"));
             administration.CreateChildPermission(PermissionNames.Pages_Administration_OrganizationUnits, L("OrganizationUnits"));
-            administration.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary, L("Dictionary"));
+
+            var dictionary = administration.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary, L("Dictionary"));
+            dictionary.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary_Type, L("DictionaryType"));
+
+            administration.CreateChildPermission(PermissionNames.Pages_Administration_AuditLogs, L("AuditLogs"));
+            administration.CreateChildPermission(PermissionNames.Pages_Administration_Setting, L("Setting"));
         }
 
         private static ILocalizableString L(string name)

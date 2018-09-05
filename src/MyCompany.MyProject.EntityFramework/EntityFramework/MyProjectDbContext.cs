@@ -3,6 +3,7 @@ using System.Data.Entity;
 using Abp.Zero.EntityFramework;
 using MyCompany.MyProject.Authorization.Roles;
 using MyCompany.MyProject.Authorization.Users;
+using MyCompany.MyProject.DictionaryCore;
 using MyCompany.MyProject.MultiTenancy;
 
 namespace MyCompany.MyProject.EntityFramework
@@ -10,6 +11,9 @@ namespace MyCompany.MyProject.EntityFramework
     public class MyProjectDbContext : AbpZeroDbContext<Tenant, Role, User>
     {
         //TODO: Define an IDbSet for your Entities...
+        public IDbSet<DictionaryType> DictionaryTypes { get; set; }
+
+        public IDbSet<DictionaryItem> DictionaryItems { get; set; }
 
         /* NOTE: 
          *   Setting "Default" to base class helps us when working migration commands on Package Manager Console.
