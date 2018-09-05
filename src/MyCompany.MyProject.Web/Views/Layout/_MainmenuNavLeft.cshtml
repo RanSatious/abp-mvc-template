@@ -1,0 +1,55 @@
+﻿@using Abp.Application.Navigation
+@using Abp.Collections.Extensions
+@using MyCompany.MyProject.Web.Views
+@model MyCompany.MyProject.Web.Models.Layout.MainMenuNavViewModel
+@{
+    var calculateMenuUrl = new Func<string, string>((url) =>
+    {
+        if (string.IsNullOrEmpty(url))
+        {
+            return ApplicationPath;
+        }
+
+        if (UrlChecker.IsRooted(url))
+        {
+            return url;
+        }
+
+        return ApplicationPath + url;
+    });
+
+    var activeNames = new List<string>();
+    var parent = string.Empty;
+    foreach (string name in Model.ActiveMenuItemName.Split('.'))
+    {
+        activeNames.Add(string.IsNullOrEmpty(parent) ? name : string.Format("{0}.{1}", parent, name));
+        parent = activeNames.Last();
+    }
+}
+
+    @foreach (var menuItem in Model.MainMenu.Items)
+    {
+    <li class="layui-nav-item @(activeNames.Contains(menuItem.Name) ? "layui-this" : "")">
+        <a href="javascript:;">
+            <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+            Admin
+        </a>
+        @if (menuItem.Items.Count == 0)
+        {
+            <a href="@calculateMenuUrl(menuItem.Url)">@menuItem.DisplayName</a>
+        }
+        else
+        {
+            <a href="javascript:;">@menuItem.DisplayName</a>
+            <dl class="layui-nav-child">
+                @foreach (var subMenuItem in menuItem.Items)
+                {
+                    <dd class="@(activeNames.Contains(subMenuItem.Name) ? "layui-this" : "")">
+                        <a href="@calculateMenuUrl(subMenuItem.Url)">@subMenuItem.DisplayName</a>
+                    </dd>
+                }
+            </dl>
+        }
+    </li>
+
+    }

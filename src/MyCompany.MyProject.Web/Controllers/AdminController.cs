@@ -38,5 +38,10 @@ namespace MyCompany.MyProject.Web.Controllers
         {
             return View();
         }
+        [AbpMvcAuthorize(PermissionNames.Pages_Administration_ChangePassWord)]
+        public ActionResult ChangePassWord()
+        {
+            return View();
+        }
     }
 }

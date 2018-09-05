@@ -52,7 +52,7 @@ namespace MyCompany.MyProject.Web
                             L("Roles"),
                             url: "Admin/Roles",
                             icon: "",
-                            requiredPermissionName: PermissionNames.Pages_Administration_Users
+                            requiredPermissionName: PermissionNames.Pages_Administration_Roles
                         )
                     ).AddItem(
                         new MenuItemDefinition(

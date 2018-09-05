@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.ActiveMenu = PageNames.Userinfo.PersonalInfo;
+    ViewBag.JsPath = "app/user/personalInfo";
+}
+
+<div class="larry-personal">
+    <form class="layui-form col-lg-5" lay-filter="form-personal">
+        <div class="layui-from-item" style="text-align:center">
+            <hr class="layui-bg-blue">
+            <h2>个人信息</h2>
+            <hr class="layui-bg-blue">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名:</label>
+            <div class="layui-input-block">
+                @*disabled="disabled"    layui-disabled*@
+                <input type="text" name="name" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱地址:</label>
+            <div class="layui-input-block">
+                <input type="email" name="emailAddress" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">上次登录时间:</label>
+            <div class="layui-input-block">
+                <input type="datetime" name="lastLoginTime" id="lastLoginTime" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间:</label>
+            <div class="layui-input-block">
+                <input type="datetime" class="layui-input" id="createtime" autocomplete="off" name="creationTime" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否活跃</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="isActive" lay-skin="switch" lay-text="ON|OFF" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色</label>
+            <div class="layui-input-block" id="personal-roles">
+            </div>
+        </div>
+    </form>
+</div>
