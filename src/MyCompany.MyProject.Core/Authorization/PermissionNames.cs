@@ -20,8 +20,7 @@
         public const string Pages_Administration_OrganizationUnits = "Pages.Administration.OrganizationUnits";
         public const string Pages_Administration_Setting = "Pages.Administration.Setting";
         public const string Pages_Profile = "Pages.Profile";
-
-        public const string Pages_Administration_ChangePassWord = "Pages.Administration.ChangePassWord";
+        
         public const string Page_Userinfo = "Pages.Userinfo";
         public const string Page_Userinfo_ChangePassWord = "Pages.Userinfo.ChangePassWord";
         public const string Page_Userinfo_PersonalInfo = "Pages.Userinfo.PersonalInfo";

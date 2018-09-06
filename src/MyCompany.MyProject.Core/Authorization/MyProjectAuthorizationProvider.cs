@@ -21,7 +21,6 @@ namespace MyCompany.MyProject.Authorization
 
             var dictionary = administration.CreateChildPermission(PermissionNames.Pages_Administration_Dictionary, L("Dictionary"));
 
-            administration.CreateChildPermission(PermissionNames.Pages_Administration_ChangePassWord, L("ChangePassWord"));
             var userinfo = pages.CreateChildPermission(PermissionNames.Page_Userinfo, L("User"));
             userinfo.CreateChildPermission(PermissionNames.Page_Userinfo_ChangePassWord, L("ChangePassWord"));
             userinfo.CreateChildPermission(PermissionNames.Page_Userinfo_PersonalInfo, L("PersonalInfo"));
