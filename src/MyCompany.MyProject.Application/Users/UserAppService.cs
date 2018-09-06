@@ -175,5 +175,33 @@ namespace MyCompany.MyProject.Users
         {
             identityResult.CheckErrors(LocalizationManager);
         }
+        public async Task<PagedResultDto<UserDto>> GetPersonalInfo(UserGetAllInput input)
+        {
+            var queryRole = from ur in _userRoleRepository.GetAll()
+                            join role in _roleRepository.GetAll() on ur.RoleId equals role.Id
+                            select new { ur, role.Name, role.DisplayName, role.Id };
+
+            var query = from user in CreateFilteredQuery(input)
+                        join org in _organizationUnitRepository.GetAll() on user.Organization equals org.Id into orgs
+                        from defaultOrg in orgs.DefaultIfEmpty()
+                        join ur in queryRole on user.Id equals ur.ur.UserId into urs
+                        from defaultUr in urs.DefaultIfEmpty()
+                        select new { user, role = defaultUr, organization = defaultOrg } into users
+                        group users by users.user into g
+                        select new { User = g.Key, Roles = g.Select(u => u.role == null ? null : new { u.role.Id, u.role.Name, u.role.DisplayName }), Organization = g.Select(u => u.organization).FirstOrDefault() };
+
+            var totalCount = await query.CountAsync();
+            //var items = await query.OrderBy(d => d.User.Id ).Where(m=>m.User.UserName==input.UserName).PageBy(input).ToListAsync();
+            var items = await query.OrderBy(d => d.User.Id).PageBy(input).ToListAsync();
+            return new PagedResultDto<UserDto>(
+                totalCount,
+                items.Select(item =>
+                {
+                    var dto = item.User.MapTo<UserDto>();
+                    dto.Roles = item.Roles.Any(d => d != null) ? item.Roles.Select(d => new string[] { d.Id.ToString(), d.Name, d.DisplayName }).ToList() : new List<string[]>();
+                    dto.OrganizationName = item.Organization?.DisplayName;
+                    return dto;
+                }).Where(d=>d.UserName==input.UserName).ToList());
+        }
     }
 }

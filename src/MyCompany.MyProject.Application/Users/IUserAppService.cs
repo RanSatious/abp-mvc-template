@@ -11,5 +11,6 @@ namespace MyCompany.MyProject.Users
     {
         Task<ListResultDto<RoleDto>> GetRoles();
         Task<IdentityResult> ChangePassword(ChangePasswordDto input);
+        Task<PagedResultDto<UserDto>> GetPersonalInfo(UserGetAllInput input);
     }
 }
