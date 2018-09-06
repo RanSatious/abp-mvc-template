@@ -37,44 +37,44 @@
     </script>
 </head>
 <body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo">后台布局</div>
-        @Html.Action("MainMenuNav", "Layout", new { activeMenu = ViewBag.ActiveMenu })
-        <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    Admin
-                </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="@Url.Action("PersonalInfo","User")">个人信息</a></dd>
-                    <dd><a href="@Url.Action("ChangePassWord","Admin")">修改密码</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="/Account/Logout">Exit</a></li>
-        </ul>
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">后台布局</div>
+            @Html.Action("MainMenuNav", "Layout", new { activeMenu = ViewBag.ActiveMenu })
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                        Admin
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="@Url.Action("PersonalInfo","User")">个人信息</a></dd>
+                        <dd><a href="@Url.Action("ChangePassWord","User")">修改密码</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="/Account/Logout">Exit</a></li>
+            </ul>
+        </div>
+        <div class="layui-body no-side">
+            <!-- 内容主体区域 -->
+            @RenderBody()
+        </div>
+
+        <div class="layui-footer no-side">
+            <!-- 底部固定区域 -->
+            © layui.com - 底部固定区域
+        </div>
     </div>
-    <div class="layui-body no-side">
-        <!-- 内容主体区域 -->
-        @RenderBody()
-    </div>
-        
-    <div class="layui-footer no-side">
-        <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
-    </div>
-</div>
-<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-<!--[if lt IE 9]>
-<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-<script type="text/javascript" src="~/Assets/layui/layui.js"></script>
-<script type="text/javascript" src="~/Assets/lib/require.js"></script>
-<script>
-    requirejs(['/assets/lib/config.js?v=' + _version]);
-</script>
-@RenderSection("scripts", required: false)
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="~/Assets/layui/layui.js"></script>
+    <script type="text/javascript" src="~/Assets/lib/require.js"></script>
+    <script>
+        requirejs(['/assets/lib/config.js?v=' + _version]);
+    </script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
