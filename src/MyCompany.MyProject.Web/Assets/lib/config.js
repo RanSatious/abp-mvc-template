@@ -11,10 +11,9 @@ requirejs.config({
 
     // core libary
     jquery: 'node_modules/jquery/dist/jquery.min',
-
     // libray
     jstree: 'node_modules/jstree/dist/jstree.min',
-
+    dayjs:'node_modules/dayjs/dayjs.min',
     // requireJs plugins
     depend: 'lib/requirejs-plugins/depend',
     text: 'lib/requirejs-plugins/text',
