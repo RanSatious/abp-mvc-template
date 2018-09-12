@@ -2,20 +2,19 @@
   var $ = layui.$;
   var form = layui.form;
   var userService = abp.services.app.user;
-  var usersessionService = abp.services.app.session;
-  var modal = {
+  var data = {
     init: function() {
-      userService.getPersonalInfo({}).then(function(data) {
-        data.items[0].creationTime = dayjs(data.items[0].creationTime).format('YYYY-MM-DD HH:mm:ss');
-        data.items[0].lastLoginTime = dayjs(data.items[0].lastLoginTime).format('YYYY-MM-DD HH:mm:ss');
+      userService.getPersonalInfo().then(function(res) {
+        res.items[0].creationTime = dayjs(res.items[0].creationTime).format('YYYY-MM-DD HH:mm:ss');
+        res.items[0].lastLoginTime = dayjs(res.items[0].lastLoginTime).format('YYYY-MM-DD HH:mm:ss');
         let temp = [];
-        data.items[0].roles.forEach(function(d) {
+        res.items[0].roles.map(function(d) {
           temp.push(d[2]);
         });
-        data.items[0].roles = temp.join(',');
-        form.val('form-personal', data.items[0]);
+        res.items[0].roles = temp.join(',');
+        form.val('form-personal', res.items[0]);
       });
     }
   };
-  modal.init();
+  data.init();
 });
