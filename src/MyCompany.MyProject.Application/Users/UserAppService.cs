@@ -179,7 +179,7 @@ namespace MyCompany.MyProject.Users
         {
             identityResult.CheckErrors(LocalizationManager);
         }
-        public async Task<ListResultDto<UserDto>> GetPersonalInfo(UserGetAllInput input)
+        public async Task<ListResultDto<UserDto>> GetPersonalInfo()
         {
             var userdata = await _sessionAppService.GetCurrentLoginInformations();
             var data = from user in Repository.GetAll()
@@ -196,7 +196,7 @@ namespace MyCompany.MyProject.Users
                            User = g.Key,
                            Roles = g.Select(u => u == null ? null : new { u.Role.Id, u.Role.Name, u.Role.DisplayName })
                        };
-            var items = await data.OrderBy(d => d.User.Id).PageBy(input).ToListAsync();
+            var items = await data.OrderBy(d => d.User.Id).ToListAsync();
             return new ListResultDto<UserDto>(
                 items.Select(item =>
                 {
