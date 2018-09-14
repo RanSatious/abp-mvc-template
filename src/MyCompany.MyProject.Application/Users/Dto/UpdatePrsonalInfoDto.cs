@@ -13,18 +13,8 @@ namespace MyCompany.MyProject.Users.Dto
     {
 
         [Required]
-        [StringLength(AbpUserBase.MaxNameLength)]
-        public string Name { get; set; }
-
-        [Required]
         [EmailAddress]
         [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string EmailAddress { get; set; }
-
-        public bool IsActive { get; set; }
-
-        public DateTime? LastLoginTime { get; set; }
-
-        public DateTime CreationTime { get; set; }
     }
 }

@@ -9,23 +9,14 @@
             margin: 0 auto;
             margin-top: 20px;
         }
-        .head-personal {
-            text-align: center;
-        }
     </style>
 }
 <div>
     <form class="layui-form form-personal" lay-filter="form-personal">
-        <div class="layui-from-item head-personal">
+        <div class="layui-from-item t-c">
             <hr class="layui-bg-blue">
             <h2>个人信息</h2>
             <hr class="layui-bg-blue">
-        </div>
-        <div class="layui-form-item" hidden>
-            <label class="layui-form-label">Id:</label>
-            <div class="layui-input-block">
-                <input type="text" name="id" autocomplete="off" class="layui-input" disabled>
-            </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">用户名:</label>
@@ -63,7 +54,7 @@
                 <input type="text" name="roles" autocomplete="off" class="layui-input" disabled>
             </div>
         </div>
-        <div class="layui-form-item ">
+        <div class="layui-form-item t-c">
           <button class="layui-btn" lay-submit lay-filter="updateUser">修改</button>
         </div>
     </form>

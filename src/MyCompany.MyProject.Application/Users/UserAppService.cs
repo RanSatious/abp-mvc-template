@@ -179,7 +179,7 @@ namespace MyCompany.MyProject.Users
         {
             identityResult.CheckErrors(LocalizationManager);
         }
-        public async Task<ListResultDto<UserDto>> GetPersonalInfo()
+        public async Task<UserDto> GetPersonalInfo()
         {
             var userdata = await _sessionAppService.GetCurrentLoginInformations();
             var data = from user in Repository.GetAll()
@@ -196,21 +196,19 @@ namespace MyCompany.MyProject.Users
                            User = g.Key,
                            Roles = g.Select(u => u == null ? null : new { u.Role.Id, u.Role.Name, u.Role.DisplayName })
                        };
-            var items = await data.OrderBy(d => d.User.Id).ToListAsync();
-            return new ListResultDto<UserDto>(
-                items.Select(item =>
-                {
-                    var dto = item.User.MapTo<UserDto>();
-                    dto.Roles = item.Roles.Any(d => d != null) ? item.Roles.Select(d => new string[] { d.Id.ToString(), d.Name, d.DisplayName }).ToList() : new List<string[]>();
-                    return dto;
-                }).ToList()
-            );
+            var item = await data.SingleAsync();
+            
+            var dto = item.User.MapTo<UserDto>();
+            dto.Roles = item.Roles.Any(d => d != null)
+                ? item.Roles.Select(d => new string[] {d.Id.ToString(), d.Name, d.DisplayName}).ToList()
+                : new List<string[]>();
+            return dto;
         }
         public async Task<IdentityResult> UpdatePrsonalInfo(UpdatePrsonalInfoDto input)
         {   
             var user = await _userManager.GetUserByIdAsync(input.Id);
             user.EmailAddress = input.EmailAddress;
-            var result=await _userManager.UpdateAsync(user);
+            var result = await _userManager.UpdateAsync(user);
             return result;
         }
     }
