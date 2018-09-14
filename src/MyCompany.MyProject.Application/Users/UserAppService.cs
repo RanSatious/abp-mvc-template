@@ -206,5 +206,12 @@ namespace MyCompany.MyProject.Users
                 }).ToList()
             );
         }
+        public async Task<IdentityResult> UpdatePrsonalInfo(UpdatePrsonalInfoDto input)
+        {   
+            var user = await _userManager.GetUserByIdAsync(input.Id);
+            user.EmailAddress = input.EmailAddress;
+            var result=await _userManager.UpdateAsync(user);
+            return result;
+        }
     }
 }
