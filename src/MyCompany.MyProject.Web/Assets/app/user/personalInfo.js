@@ -21,7 +21,6 @@
         var action = userService.updatePrsonalInfo;
         action(data.normalize(result.field))
           .then(function(resultres) {
-            console.log('resultres', resultres);
             if (resultres.succeeded) {
               abp.notify.success('个人信息修改成功');
             } else {
