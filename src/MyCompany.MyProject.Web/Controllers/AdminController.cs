@@ -38,5 +38,10 @@ namespace MyCompany.MyProject.Web.Controllers
         {
             return View();
         }
+        [AbpMvcAuthorize(PermissionNames.Pages_Administration_AuditLogs)]
+        public ActionResult AuditLogs()
+        {
+            return View();
+        }
     }
 }

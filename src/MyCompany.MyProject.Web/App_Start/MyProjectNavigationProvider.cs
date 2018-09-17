@@ -70,6 +70,13 @@ namespace MyCompany.MyProject.Web
                         icon: "",
                         requiredPermissionName: PermissionNames.Pages_Administration_Dictionary
                         ))
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.Administration.AuditLogs,
+                    L("AuditLogs"),
+                    url: "Admin/AuditLogs",
+                    icon: "",
+                    requiredPermissionName: PermissionNames.Pages_Administration_AuditLogs
+                    ))
                 ).AddItem(
                     new MenuItemDefinition(
                         PageNames.Sample.Index,

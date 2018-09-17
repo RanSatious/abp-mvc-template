@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.ActiveMenu = PageNames.Administration.AuditLogs;
+    ViewBag.JsPath = "app/admin/auditLogs";
+}
+<div>
+  用户名
+  <div class="layui-inline">
+    <input class="layui-input" name="userName" id="userName" autocomplete="off">
+  </div>
+  <button class="layui-btn" id="btn-search">搜索</button>
+</div>
+<table id="main-table" lay-filter="auditlogs"></table>
