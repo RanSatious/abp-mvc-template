@@ -1,7 +1,6 @@
-﻿define(['main', 'dayjs', 'lay!form', 'lay!table'], function(main, dayjs) {
+﻿define(['main', 'lay!form', 'lay!table'], function(main) {
   var table = layui.table;
   var $ = layui.$;
-  var form = layui.form;
   table.render({
     elem: '#main-table',
     id: 'main-table',
