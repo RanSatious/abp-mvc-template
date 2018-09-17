@@ -218,6 +218,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConsts.cs" />
+    <Compile Include="AuditLogs\AuditLogsAppService.cs" />
+    <Compile Include="AuditLogs\Dto\AuditLogsDto.cs" />
+    <Compile Include="AuditLogs\Dto\GetAuditLogInput.cs" />
+    <Compile Include="AuditLogs\IAuditLogsAppService.cs" />
     <Compile Include="Dictionarys\DictionaryAppService.cs" />
     <Compile Include="Dictionarys\DictionaryTypeAppService.cs" />
     <Compile Include="Dictionarys\Dto\CreateDictionaryItemInput.cs" />
@@ -290,6 +294,7 @@
       <Name>MyCompany.MyProject.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
