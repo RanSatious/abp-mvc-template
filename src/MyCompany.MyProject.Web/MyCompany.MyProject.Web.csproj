@@ -432,6 +432,7 @@
     <Content Include="Assets\abp\abp.jquery.js" />
     <Content Include="Assets\abp\abp.js" />
     <Content Include="Assets\app\account\login.js" />
+    <Content Include="Assets\app\admin\auditLogs.js" />
     <Content Include="Assets\app\admin\dictionary.js" />
     <Content Include="Assets\app\admin\dictionaryItemModal.js" />
     <Content Include="Assets\app\admin\dictionaryTypeModal.js" />
@@ -640,6 +641,7 @@
     <Content Include="Views\User\PersonalInfo.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Sample\Table.cshtml" />
+    <Content Include="Views\Admin\AuditLogs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
