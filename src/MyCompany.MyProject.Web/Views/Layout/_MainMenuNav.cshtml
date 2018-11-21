@@ -25,6 +25,18 @@
         activeNames.Add(string.IsNullOrEmpty(parent) ? name : string.Format("{0}.{1}", parent, name));
         parent = activeNames.Last();
     }
+    var activeMenus = new List<UserMenuItem>();
+    UserMenuItem parentMenu = null;
+    foreach (var name in activeNames)
+    {
+        var sub = (parentMenu == null ? Model.MainMenu.Items : parentMenu.Items).FirstOrDefault(d => d.Name == name);
+        if (sub != null)
+        {
+            activeMenus.Add(sub);
+            parentMenu = sub;
+        }
+    }
+    ViewBag.activeMenus = activeMenus;
 }
 <ul class="layui-nav layui-layout-left">
     @foreach (var menuItem in Model.MainMenu.Items)

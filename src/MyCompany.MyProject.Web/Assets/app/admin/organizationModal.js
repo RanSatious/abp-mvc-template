@@ -37,7 +37,7 @@ define(['main', 'text!/Views/Admin/_organizationModal.html', 'lay!form', 'lay!la
       layer.close(modal.index);
     },
     normalize: function(data) {
-      return Object.assign({}, modal.model, data);
+      return $.extend({}, modal.model, data);
     }
   };
 

@@ -12,10 +12,8 @@ namespace MyCompany.MyProject.Dictionarys
 {
     public interface IDictionaryAppService : IAsyncCrudAppService<DictionaryItemDto, long, PagedSortedAndFilteredInputDto, CreateDictionaryItemInput, DictionaryItemDto>
     {
-        Task DeleteAll(long[] ids);
-
-        Task OrderType(int typeId);
-
         Task<ListResultDto<DictionaryItemDto>> GetAllByTypeName(string name);
+        Task<ListResultDto<DictionaryItemDto>> GetByTypeName(string name);
+        Task<List<DictionaryGroupDto>> GetDictionarys(List<string> names);
     }
 }

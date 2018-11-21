@@ -1,31 +1,16 @@
 ﻿<div class="modal-container">
-    <form class="layui-form" lay-filter="form-user">
-        <div class="layui-form-item">
-            <div class="layui-inline">类型 </div>
-            <div class="layui-inline">
-                <input type="text" name="typeName" class="layui-input layui-disabled layui-bg-gray" />
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">名称 </div>
-            <div class="layui-inline">
-                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input" />
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">排序 </div>
-            <div class="layui-inline">
-                <input type="text" name="order" lay-verify="required" autocomplete="off" class="layui-input" />
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">说明 </div>
-            <div class="layui-inline">
-                <textarea rows="2" name="info" maxlength="255" class="layui-textarea"></textarea>
-            </div>
-        </div>
-        <div class="layui-form-item t-c">
-            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="addDictionaryItem">保存</button>
-        </div>
-    </form>
+  <form class="layui-form" lay-filter="main">
+    <div class="layui-form-item">
+      <input type="text" disabled class="layui-input layui-disabled layui-bg-gray" value="{{d.typeName}}" />
+    </div>
+    <div class="layui-form-item">
+      <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input" placeholder="名称" />
+    </div>
+    <div class="layui-form-item">
+      <textarea rows="2" name="info" maxlength="255" class="layui-textarea" placeholder="说明"></textarea>
+    </div>
+    <div class="layui-form-item t-c">
+      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="save">保存</button>
+    </div>
+  </form>
 </div>

@@ -6,7 +6,7 @@ using Abp.Extensions;
 using Abp.Linq.Extensions;
 using MyCompany.MyProject.Dto;
 using MyCompany.MyProject.Authorization;
-using MyCompany.MyProject.DictionaryCore;
+using MyCompany.MyProject.Dictionary;
 using MyCompany.MyProject.Dictionarys.Dto;
 using System;
 using System.Collections.Generic;
@@ -14,64 +14,69 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.UI;
 
 namespace MyCompany.MyProject.Dictionarys
 {
-  public class DictionaryAppService : AsyncCrudAppService<DictionaryItem, DictionaryItemDto, long, PagedSortedAndFilteredInputDto, CreateDictionaryItemInput, DictionaryItemDto>, IDictionaryAppService
-  {
-    public DictionaryAppService(IRepository<DictionaryItem, long> repository) : base(repository)
+    public class DictionaryAppService : AsyncCrudAppService<DictionaryItem, DictionaryItemDto, long, PagedSortedAndFilteredInputDto, CreateDictionaryItemInput, DictionaryItemDto>, IDictionaryAppService
     {
-      CreatePermissionName = PermissionNames.Pages_Administration_Dictionary;
-      UpdatePermissionName = PermissionNames.Pages_Administration_Dictionary;
-      DeletePermissionName = PermissionNames.Pages_Administration_Dictionary;
-    }
+        private readonly IRepository<DictionaryType, long> _dictionaryTypeRepository;
+        public DictionaryAppService(
+            IRepository<DictionaryItem, long> repository,
+            IRepository<DictionaryType, long> dictionaryTypeRepository) : base(repository)
+        {
+            _dictionaryTypeRepository = dictionaryTypeRepository;
+        }
 
-    protected override IQueryable<DictionaryItem> CreateFilteredQuery(PagedSortedAndFilteredInputDto input)
-    {
-      return Repository.GetAllIncluding(item => item.DictionaryType)
-          .WhereIf(!input.Filter.IsNullOrWhiteSpace(), m => m.Type.ToString() == input.Filter);
-    }
+        protected override IQueryable<DictionaryItem> CreateFilteredQuery(PagedSortedAndFilteredInputDto input)
+        {
+            return Repository.GetAllIncluding(item => item.DictionaryType)
+                .WhereIf(!input.Filter.IsNullOrWhiteSpace(), m => m.TypeId.ToString() == input.Filter);
+        }
 
-    public override Task<PagedResultDto<DictionaryItemDto>> GetAll(PagedSortedAndFilteredInputDto input)
-    {
-      long filter = 1;
-      if (!string.IsNullOrEmpty(input.Filter))
-        filter = long.Parse(input.Filter);
-      var result = Repository.GetAll().WhereIf(!string.IsNullOrEmpty(input.Filter), c => c.Type == filter).MapTo<List<DictionaryItemDto>>();
-      var totalcount = result.Count;
-      return Task.FromResult(new PagedResultDto<DictionaryItemDto>(totalcount, result));
-      //input.Sorting = "Order ASC";
-      //return base.GetAll(input);
-    }
+        public async Task<ListResultDto<DictionaryItemDto>> GetAllByTypeName(string name)
+        {
+            var items = Repository.GetAllIncluding(item => item.DictionaryType)
+                .WhereIf(!string.IsNullOrWhiteSpace(name), item => item.DictionaryType.Name == name);
 
-    public override async Task<DictionaryItemDto> Create(CreateDictionaryItemInput input)
-    {
-      // generate value automatically
-      var query = Repository.GetAll().Where(t => t.Type == input.Type);
-      var count = await query.CountAsync();
-      input.Value = count > 0 ? await query.MaxAsync(t => t.Value) + 1 : 1;
-      return await base.Create(input);
-    }
+            return await Task.FromResult(new ListResultDto<DictionaryItemDto>(ObjectMapper.Map<List<DictionaryItemDto>>(items)));
+        }
 
-    public async Task<ListResultDto<DictionaryItemDto>> GetAllByTypeName(string name)
-    {
-      var items = Repository.GetAllIncluding(item => item.DictionaryType)
-          .WhereIf(!string.IsNullOrWhiteSpace(name), item => item.DictionaryType.Name == name);
+        public async Task DeleteAll(long[] ids)
+        {
+            foreach (long id in ids)
+            {
+                await Delete(new EntityDto<long>(id));
+            }
+        }
+        public async Task<ListResultDto<DictionaryItemDto>> GetByTypeName(string name)
+        {
+            var query = from dictionaryType in _dictionaryTypeRepository.GetAll()
+                        where dictionaryType.Name == name
+                        join dictionaryItem in Repository.GetAll() on dictionaryType.Id equals dictionaryItem.TypeId
+                        select new { dictionaryItem };
+            var items = await query.OrderBy(d => d.dictionaryItem.Id).ToListAsync();
+            var result = new ListResultDto<DictionaryItemDto>(
+                items.Select(item => {
+                    var dto = item.dictionaryItem.MapTo<DictionaryItemDto>();
+                    return dto;
+                }).ToList());
+            return result;
+        }
 
-      return await Task.FromResult(new ListResultDto<DictionaryItemDto>(ObjectMapper.Map<List<DictionaryItemDto>>(items)));
+        public async Task<List<DictionaryGroupDto>> GetDictionarys(List<string> names)
+        {
+            var list = new List<DictionaryGroupDto>();
+            foreach (var name in names)
+            {
+                var type = await _dictionaryTypeRepository.FirstOrDefaultAsync(t => t.Name == name);
+                if (type == null)
+                {
+                    throw new UserFriendlyException("Err_Type_Not_Found");
+                }
+                list.Add(new DictionaryGroupDto() { Name = name, DisplayName = type.DisplayName, Items = (await GetAllByTypeName(name)).Items.ToList() });
+            }
+            return list;
+        }
     }
-
-    public async Task DeleteAll(long[] ids)
-    {
-      foreach (long id in ids)
-      {
-        await Delete(new EntityDto<long>(id));
-      }
-    }
-
-    public Task OrderType(int typeId)
-    {
-      throw new NotImplementedException();
-    }
-  }
 }

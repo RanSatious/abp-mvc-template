@@ -1,5 +1,5 @@
 ﻿using Abp.AutoMapper;
-using MyCompany.MyProject.DictionaryCore;
+using MyCompany.MyProject.Dictionary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

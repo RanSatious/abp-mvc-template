@@ -1,5 +1,4 @@
 define(['main', 'app/admin/userModal', 'lib/table', 'lay!form'], function(main, userModal) {
-  var $ = layui.$;
   var table = layui.table;
   var form = layui.form;
 
@@ -44,7 +43,15 @@ define(['main', 'app/admin/userModal', 'lib/table', 'lay!form'], function(main, 
         { field: 'userName', title: '登录名' },
         { field: 'name', title: '用户名' },
         { field: 'organizationName', title: '部门' },
-        { field: 'roles', title: '角色', templet: '#roleTpl' },
+        {
+          field: 'roles',
+          title: '角色',
+          templet: function(d) {
+            return d.roles.map(function(r) {
+              return r[2];
+            });
+          }
+        },
         { field: 'action', title: '操作', width: 120, toolbar: '#actionTpl', align: 'center', unresize: true }
       ]
     ]

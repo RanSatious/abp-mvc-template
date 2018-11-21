@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyCompany.MyProject.DictionaryCore
+namespace MyCompany.MyProject.Dictionary
 {
     [Table("DictionaryType")]
     public class DictionaryType : FullAuditedEntity<long>, IMayHaveTenant

@@ -3,7 +3,7 @@ using System.Data.Entity;
 using Abp.Zero.EntityFramework;
 using MyCompany.MyProject.Authorization.Roles;
 using MyCompany.MyProject.Authorization.Users;
-using MyCompany.MyProject.DictionaryCore;
+using MyCompany.MyProject.Dictionary;
 using MyCompany.MyProject.MultiTenancy;
 
 namespace MyCompany.MyProject.EntityFramework

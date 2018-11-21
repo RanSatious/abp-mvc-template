@@ -1,0 +1,14 @@
+﻿
+@model string
+<ul class="layui-nav layui-layout-right">
+    <li class="layui-nav-item">
+        <a href="javascript:;">
+            @Model
+        </a>
+        <dl class="layui-nav-child">
+            <dd><a href="@Url.Action("PersonalInfo","User")">个人信息</a></dd>
+            <dd><a href="@Url.Action("ChangePassWord","User")">修改密码</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="/Account/Logout">退出</a></li>
+</ul>

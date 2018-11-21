@@ -39,8 +39,7 @@ define(['jquery', 'abp/abp.core', 'lay!layer'], function($, abp, layer) {
       option = { message: option };
     }
 
-    option = Object.assign({}, abp.libs.layer.config['default'], abp.libs.layer.config[type], option);
-    console.log(option);
+    option = $.extend({}, abp.libs.layer.config['default'], abp.libs.layer.config[type], option);
 
     return $.Deferred(function($dfd) {
       layer.alert(option.message, option, function(index) {
@@ -70,7 +69,7 @@ define(['jquery', 'abp/abp.core', 'lay!layer'], function($, abp, layer) {
       option = { message: option };
     }
 
-    option = Object.assign({}, abp.libs.layer.config['default'], abp.libs.layer.config.confirm, option);
+    option = $.extend({}, abp.libs.layer.config['default'], abp.libs.layer.config.confirm, option);
 
     return $.Deferred(function($dfd) {
       layer.confirm(

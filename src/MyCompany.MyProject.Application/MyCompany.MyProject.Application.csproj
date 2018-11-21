@@ -225,6 +225,7 @@
     <Compile Include="Dictionarys\DictionaryAppService.cs" />
     <Compile Include="Dictionarys\DictionaryTypeAppService.cs" />
     <Compile Include="Dictionarys\Dto\CreateDictionaryItemInput.cs" />
+    <Compile Include="Dictionarys\Dto\DictionaryGroupDto.cs" />
     <Compile Include="Dictionarys\Dto\DictionaryItemDto.cs" />
     <Compile Include="Dictionarys\Dto\DictionaryTypeDto.cs" />
     <Compile Include="Dictionarys\Dto\DictionaryTypeInput.cs" />

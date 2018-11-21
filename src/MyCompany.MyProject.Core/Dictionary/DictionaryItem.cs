@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyCompany.MyProject.DictionaryCore
+namespace MyCompany.MyProject.Dictionary
 {
     [Table("DictionaryItem")]
     public class DictionaryItem : FullAuditedEntity<long>, IMayHaveTenant
@@ -18,20 +18,16 @@ namespace MyCompany.MyProject.DictionaryCore
 
         public virtual int? TenantId { get; set; }
 
-        public long Type { get; set; }
+        [Required, ForeignKey("DictionaryType")]
+        public long TypeId { get; set; }
 
         [Required]
         [MaxLength(NameMaxLength)]
         public string Name { get; set; }
 
-        [Required]
-        public int Order { get; set; }
 
         [MaxLength(InfoMaxLength)]
         public string Info { get; set; }
-
-        [Required]
-        public int Value { get; set; }
 
         public virtual DictionaryType DictionaryType { get; set; }
     }

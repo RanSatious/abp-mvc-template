@@ -28,7 +28,6 @@ define(['main', 'text!/Views/Admin/_userModal.html', 'lay!form', 'lay!layer', 'l
         modal.model.roles.forEach(function(d) {
           roles['role[' + d[1] + ']'] = true;
         });
-        console.log(roles);
         form.val('form-user', roles);
       }
 
@@ -64,7 +63,7 @@ define(['main', 'text!/Views/Admin/_userModal.html', 'lay!form', 'lay!layer', 'l
       layer.close(modal.index);
     },
     normalize: function(data) {
-      var item = Object.assign({ isActive: true, surname: data.name, roleNames: [] }, modal.model, data);
+      var item = $.extend({ isActive: true, surname: data.name, roleNames: [] }, modal.model, data);
       // clear roles
       item.roleNames.length = 0;
       // reset roles

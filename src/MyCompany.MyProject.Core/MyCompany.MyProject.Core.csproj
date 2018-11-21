@@ -199,8 +199,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DictionaryCore\DictionaryItem.cs" />
-    <Compile Include="DictionaryCore\DictionaryType.cs" />
+    <Compile Include="Dictionary\DictionaryItem.cs" />
+    <Compile Include="Dictionary\DictionaryType.cs" />
     <Compile Include="MyProjectConsts.cs" />
     <Compile Include="MyProjectCoreModule.cs" />
     <Compile Include="AppVersionHelper.cs" />

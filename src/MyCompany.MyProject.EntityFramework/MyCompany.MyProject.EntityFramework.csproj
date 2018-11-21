@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201809050319207_add_DictionaryType_DictionaryItem.Designer.cs">
       <DependentUpon>201809050319207_add_DictionaryType_DictionaryItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811210609568_Update_Dictionary.cs" />
+    <Compile Include="Migrations\201811210609568_Update_Dictionary.Designer.cs">
+      <DependentUpon>201811210609568_Update_Dictionary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AbpZeroDbMigrator.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyProjectDataModule.cs" />
@@ -262,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809050319207_add_DictionaryType_DictionaryItem.resx">
       <DependentUpon>201809050319207_add_DictionaryType_DictionaryItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811210609568_Update_Dictionary.resx">
+      <DependentUpon>201811210609568_Update_Dictionary.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

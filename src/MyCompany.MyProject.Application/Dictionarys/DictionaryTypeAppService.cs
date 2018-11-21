@@ -4,27 +4,26 @@ using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.UI;
 using MyCompany.MyProject.Authorization;
-using MyCompany.MyProject.DictionaryCore;
+using MyCompany.MyProject.Dictionary;
 using MyCompany.MyProject.Dictionarys.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.Application.Services;
 
 namespace MyCompany.MyProject.Dictionarys
 {
-    [AbpAuthorize]
-    public class DictionaryTypeAppService : MyProjectAsyncCurdAppServiceBase<DictionaryType, DictionaryTypeDto, long, PagedResultRequestDto, DictionaryTypeInput, DictionaryTypeDto>, IDictionaryTypeAppService
+    [AbpAuthorize(PermissionNames.Pages_Administration_Dictionary)]
+    public class DictionaryTypeAppService : AsyncCrudAppService<DictionaryType, DictionaryTypeDto, long, PagedResultRequestDto, DictionaryTypeInput, DictionaryTypeDto>, IDictionaryTypeAppService
     {
         public DictionaryTypeAppService(IRepository<DictionaryType, long> repository) : base(repository)
         {
-            CreatePermissionName = PermissionNames.Pages_Administration_Dictionary;
-            UpdatePermissionName = PermissionNames.Pages_Administration_Dictionary;
-            DeletePermissionName = PermissionNames.Pages_Administration_Dictionary;
+            LocalizationSourceName = MyProjectConsts.LocalizationSourceName;
         }
 
-        public override Task<DictionaryTypeDto> Create(DictionaryTypeInput input)
+        public override async Task<DictionaryTypeDto> Create(DictionaryTypeInput input)
         {
             // check name
             var nameCount = Repository.Count(t => t.Name == input.Name.Trim());
@@ -32,30 +31,32 @@ namespace MyCompany.MyProject.Dictionarys
             {
                 throw new UserFriendlyException(L("Err_Name_In_Use"));
             }
-            return base.Create(input);
+            return await base.Create(input);
         }
 
-        public override Task<PagedResultDto<DictionaryTypeDto>> GetAll(PagedResultRequestDto input)
+        public override async Task<DictionaryTypeDto> Update(DictionaryTypeDto input)
         {
-            var totalcount = Repository.Count();
-            var result = Repository.GetAll().OrderByDescending(c => c.DisplayName.Length).MapTo<List<DictionaryTypeDto>>();
-
-            return Task.FromResult( new PagedResultDto<DictionaryTypeDto>(totalcount,result));
+            CheckUpdatePermission();
+            var entity = await GetEntityByIdAsync(input.Id);
+            entity.DisplayName = input.DisplayName;
+            await CurrentUnitOfWork.SaveChangesAsync();
+            return MapToEntityDto(entity);
         }
 
-        public override Task Delete(EntityDto<long> input)
+        public override async Task Delete(EntityDto<long> input)
         {
-            var type = Repository.Get(input.Id);
+            var type = await Repository.GetAsync(input.Id);
             if (type.Items.Count > 0)
             {
                 throw new UserFriendlyException(L("Err_Type_In_Use"));
             }
-            return base.Delete(input);
+
+            await base.Delete(input);
         }
 
         public async Task<DictionaryTypeDto> GetByName(string name)
         {
-            var type = await Repository.FirstOrDefaultAsync(t => t.Name == name);
+            var type = await Repository.FirstOrDefaultAsync(t => t.Name == name.Trim());
             if (type == null)
             {
                 throw new UserFriendlyException(L("Err_Type_Not_Found"));

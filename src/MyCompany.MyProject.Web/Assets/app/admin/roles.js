@@ -1,5 +1,4 @@
-define(['main', 'app/admin/roleModal', 'lib/table', 'lay!form', 'lay!layer'], function(main, roleModal) {
-  var $ = layui.$;
+define(['main', 'app/admin/roleModal', 'lib/table', 'lay!form', '!lay!layer'], function(main, roleModal) {
   var table = layui.table;
   var form = layui.form;
   var layer = layui.layer;

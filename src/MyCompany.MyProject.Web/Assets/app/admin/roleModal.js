@@ -1,7 +1,4 @@
-define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'lay!laytpl', 'jstree'], function(
-  main,
-  modalView
-) {
+define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'lay!laytpl', 'jstree'], function(main, modalView) {
   console.log('role modal loaded');
   var form = layui.form;
   var layer = layui.layer;
@@ -61,7 +58,7 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
       layer.close(modal.index);
     },
     normalize: function(data) {
-      var item = Object.assign({ isStatic: false, normalizedName: '', permissions: [] }, modal.model, data);
+      var item = $.extend({ isStatic: false, normalizedName: '', permissions: [] }, modal.model, data);
       var permissions = [];
       var tree = $('.permissions-container').jstree(true);
       tree.get_selected().forEach(function(item, index) {
@@ -77,7 +74,6 @@ define(['main', 'text!/Views/Admin/_roleModal.html', 'lay!form', 'lay!layer', 'l
         }
       });
       permissions.sort();
-      console.log(permissions);
       item.permissions = permissions;
       return item;
     },

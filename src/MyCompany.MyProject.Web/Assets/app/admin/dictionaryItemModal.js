@@ -1,75 +1,64 @@
-﻿define(['main',
-    'text!/Views/Admin/_dictionaryItemModal.html',
-    'lay!form',
-    'lay!layer',
-    'lay!laytpl'], function (main, modalView) {
-        var form = layui.form;
-        var layer = layui.layer;
-        var laytpl = layui.laytpl;
-        var table = layui.table;
-        var abp = main.abp;
+﻿define(['main', 'text!/Views/Admin/_dictionaryItemModal.html', 'lay!form', 'lay!layer', 'lay!laytpl'], function(main, modalView) {
+  var form = layui.form;
+  var layer = layui.layer;
+  var laytpl = layui.laytpl;
+  var table = layui.table;
+  var abp = main.abp;
 
-        var dictionaryService = abp.services.app.dictionary;
+  var service = abp.services.app.dictionary;
 
-        var modal = {
-            index: 0,
-            isEdit: false,
-            model: {},
-            callback: null,
-            open: function (params) {
-                modal.index = layer.open({
-                    type: 1,
-                    title: modal.isEdit ? '编辑' : '添加',
-                    area: ['600px,600px'],
-                    content: laytpl(modalView).render(params)
-                });
+  var modal = {
+    index: 0,
+    isEdit: false,
+    model: {},
+    type: null,
+    callback: null,
+    open: function(params) {
+      modal.index = layer.open({
+        type: 1,
+        title: modal.isEdit ? '编辑' : '添加',
+        area: '400px',
+        content: laytpl(modalView).render(params.type)
+      });
 
-                modal.init(params);
-            },
-            init: function (params) {
-                modal.model = params.model;
-                modal.callback = params.callback;
-                modal.initForm();
+      modal.init(params);
+    },
+    init: function(params) {
+      modal.model = modal.isEdit ? params.model : { typeId: params.type.typeId };
+      modal.type = params.type;
+      modal.callback = params.callback;
+      modal.initForm();
+    },
+    initForm: function() {
+      form.val('main', modal.model);
 
+      form.on('submit(save)', function(data) {
+        var action = modal.isEdit ? service.update : service.create;
+        action(modal.normalize(data.field)).then(function(result) {
+          modal.callback && modal.callback(result);
+          layer.close(modal.index);
+        });
+        return false;
+      });
+    },
+    close: function() {
+      layer.close(modal.index);
+    },
+    normalize: function(data) {
+      var item = $.extend({}, modal.model, data);
+      return item;
+    }
+  };
 
-            },
-            initForm: function () {
-                form.val('form-user', modal.model);
-
-                form.on('submit(addDictionaryItem)', function (data) {
-
-                    var action = modal.isEdit ? dictionaryService.update : dictionaryService.create;
-                    action(modal.normalize(data.field)).then(function (result) {
-                        modal.callback && modal.callback(result);
-                        layer.close(modal.index);
-                        table.reload('main-table');
-                    });
-                    return false;
-                });
-            },
-            close: function () {
-                layer.close(modal.index);
-            },
-            normalize: function (data) {
-                var item = Object.assign({ info: data.info, name: data.name, order: data.order, type: data.type },modal.model,data);
-                
-                return item;
-            },
-        };
-
-        return {
-            create: function (params) {
-                params.model = { type: params.id, typeName: params.name };
-                modal.isEdit = false;
-                modal.open(params);
-            },
-            edit: function (params) {
-                var source = { type: params.type.id, typeName: params.type.name };
-                var item = Object.assign(params.model, source);
-                params.model = item;
-                modal.isEdit = true;
-                modal.open(params);
-            },
-            close: modal.close
-        };
-    });
+  return {
+    create: function(params) {
+      modal.isEdit = false;
+      modal.open(params);
+    },
+    edit: function(params) {
+      modal.isEdit = true;
+      modal.open(params);
+    },
+    close: modal.close
+  };
+});
