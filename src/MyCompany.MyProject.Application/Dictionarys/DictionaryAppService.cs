@@ -4,7 +4,7 @@ using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
-using Ideayapai.Bridge.Health.Dto;
+using MyCompany.MyProject.Dto;
 using MyCompany.MyProject.Authorization;
 using MyCompany.MyProject.DictionaryCore;
 using MyCompany.MyProject.Dictionarys.Dto;

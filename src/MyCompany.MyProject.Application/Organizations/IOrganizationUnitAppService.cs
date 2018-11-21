@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
-using Ideayapai.Bridge.Health.Organizations.Dto;
+using MyCompany.MyProject.Organizations.Dto;
 
-namespace Ideayapai.Bridge.Health.Organizations
+namespace MyCompany.MyProject.Organizations
 {
     public interface IOrganizationUnitAppService : IApplicationService
     {

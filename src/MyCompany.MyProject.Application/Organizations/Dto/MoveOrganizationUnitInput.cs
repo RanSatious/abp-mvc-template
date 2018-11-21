@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Ideayapai.Bridge.Health.Organizations.Dto
+namespace MyCompany.MyProject.Organizations.Dto
 {
     public class MoveOrganizationUnitInput
     {

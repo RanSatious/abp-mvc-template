@@ -2,7 +2,7 @@ using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.Organizations;
 
-namespace Ideayapai.Bridge.Health.Organizations.Dto
+namespace MyCompany.MyProject.Organizations.Dto
 {
     [AutoMapFrom(typeof(OrganizationUnit))]
     public class OrganizationUnitDto : AuditedEntityDto<long>

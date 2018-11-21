@@ -1,6 +1,6 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
-using Ideayapai.Bridge.Health.Dto;
+using MyCompany.MyProject.Dto;
 using MyCompany.MyProject.Dictionarys.Dto;
 using System;
 using System.Collections.Generic;

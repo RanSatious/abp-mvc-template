@@ -9,12 +9,12 @@ using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
 using Abp.Organizations;
 using Abp.UI;
-using Ideayapai.Bridge.Health.Organizations.Dto;
+using MyCompany.MyProject.Organizations.Dto;
 using MyCompany.MyProject;
 using MyCompany.MyProject.Authorization;
 using MyCompany.MyProject.Authorization.Users;
 
-namespace Ideayapai.Bridge.Health.Organizations
+namespace MyCompany.MyProject.Organizations
 {
     [AbpAuthorize(PermissionNames.Pages_Administration_OrganizationUnits)]
     public class OrganizationUnitAppService : MyProjectAppServiceBase, IOrganizationUnitAppService

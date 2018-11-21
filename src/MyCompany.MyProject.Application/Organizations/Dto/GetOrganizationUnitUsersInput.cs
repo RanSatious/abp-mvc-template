@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using Abp.Runtime.Validation;
-using Ideayapai.Bridge.Health.Dto;
+using MyCompany.MyProject.Dto;
 
-namespace Ideayapai.Bridge.Health.Organizations.Dto
+namespace MyCompany.MyProject.Organizations.Dto
 {
     public class GetOrganizationUnitUsersInput : PagedAndSortedInputDto, IShouldNormalize
     {

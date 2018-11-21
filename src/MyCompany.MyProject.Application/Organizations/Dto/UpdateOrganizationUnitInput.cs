@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Abp.Organizations;
 
-namespace Ideayapai.Bridge.Health.Organizations.Dto
+namespace MyCompany.MyProject.Organizations.Dto
 {
     public class UpdateOrganizationUnitInput
     {

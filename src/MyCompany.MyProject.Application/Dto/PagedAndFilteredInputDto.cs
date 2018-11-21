@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
 
-namespace Ideayapai.Bridge.Health.Dto
+namespace MyCompany.MyProject.Dto
 {
     public class PagedAndFilteredInputDto : IPagedResultRequest
     {

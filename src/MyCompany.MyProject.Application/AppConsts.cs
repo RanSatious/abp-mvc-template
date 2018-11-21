@@ -1,4 +1,4 @@
-﻿namespace Ideayapai.Bridge.Health
+﻿namespace MyCompany.MyProject
 {
     /// <summary>
     /// Some consts used in the application.

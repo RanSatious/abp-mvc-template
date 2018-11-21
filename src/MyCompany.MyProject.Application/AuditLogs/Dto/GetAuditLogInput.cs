@@ -1,5 +1,5 @@
 ﻿using Abp.Runtime.Validation;
-using Ideayapai.Bridge.Health.Dto;
+using MyCompany.MyProject.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -3,7 +3,7 @@ using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using MyCompany.MyProject.Authorization.Users;
 
-namespace Ideayapai.Bridge.Health.Organizations.Dto
+namespace MyCompany.MyProject.Organizations.Dto
 {
     [AutoMapFrom(typeof(User))]
     public class OrganizationUnitUserListDto : EntityDto<long>

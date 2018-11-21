@@ -1,4 +1,4 @@
-﻿namespace Ideayapai.Bridge.Health.Dto
+﻿namespace MyCompany.MyProject.Dto
 {
     public class PagedSortedAndFilteredInputDto : PagedAndSortedInputDto
     {
