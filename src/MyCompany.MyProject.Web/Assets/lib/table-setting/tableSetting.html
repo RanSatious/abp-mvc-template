@@ -4,8 +4,13 @@
     <button class="layui-btn layui-btn-disabled" id="btn-down" disabled>↓</button>
   </div>
   <div class="setting-body">
-    {{# layui.each(d.model, function(index, item){ }}
-    <p data-index="{{index}}">{{item.title}}</p> {{# }); }}
+    <form class="layui-form setting-form" action="">
+      {{# layui.each(d.items, function(index, item){ }}
+      <p data-index="{{index}}">
+        <input type="checkbox" name="show" lay-skin="primary" title="{{item.name}}" {{item.show ? 'checked' : ''}}>
+      </p>
+      {{# }); }}
+    </form>
   </div>
 </div>
 <div class="setting-footer">

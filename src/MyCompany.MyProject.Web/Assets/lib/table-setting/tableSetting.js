@@ -1,10 +1,14 @@
 define([
   'main',
   'text!/assets/lib/table-setting/tableSetting.html',
+  'text!/assets/lib/table-setting/column.html',
   'css!/assets/lib/table-setting/tableSetting.css',
+  'lay!form',
+  'lay!element',
   'lay!laytpl'
-], function(main, modalView) {
+], function(main, modalView, columnView) {
   var layer = layui.layer;
+  var form = layui.form;
   var laytpl = layui.laytpl;
 
   var modal = {
@@ -12,12 +16,21 @@ define([
     model: {},
     current: null,
     callback: null,
+    titleProp: null,
     init: function(params) {
       modal.model = params.model;
+      modal.model.forEach(function(item) {
+        if (item.show === undefined) {
+          item.show = true;
+        }
+      });
       modal.callback = params.callback;
+      modal.titleProp = params.titleProp || 'title';
 
       $('.setting-body p').click(function(e) {
-        modal.select($(this));
+        if (e.target == this) {
+          modal.select($(this));
+        }
       });
       $('#btn-up').click(modal.up);
       $('#btn-down').click(modal.down);
@@ -28,8 +41,13 @@ define([
         type: 1,
         title: '设置',
         area: '400px',
-        content: laytpl(modalView).render(params)
+        content: laytpl(modalView).render({
+          items: params.model.map(function(item) {
+            return { name: item[params.titleProp], show: item.show === undefined ? true : item.show };
+          })
+        })
       });
+      form.render();
       modal.init(params);
     },
     close: function() {
@@ -80,9 +98,19 @@ define([
       modal.model[index - 1] = modal.model[index];
       modal.model[index] = temp;
 
-      modal.current.text(modal.model[index].title).removeClass('active');
+      modal.current
+        .html(laytpl(columnView).render({ name: modal.model[index][modal.titleProp], show: modal.model[index].show }))
+        .removeClass('active');
       modal.current = $(modal.current[0].previousElementSibling);
-      modal.current.text(modal.model[index - 1].title).addClass('active');
+      modal.current
+        .html(
+          laytpl(columnView).render({
+            name: modal.model[index - 1][modal.titleProp],
+            show: modal.model[index - 1].show
+          })
+        )
+        .addClass('active');
+      form.render();
 
       modal.checkButton(index - 1);
     },
@@ -97,25 +125,22 @@ define([
       modal.model[index + 1] = modal.model[index];
       modal.model[index] = temp;
 
-      modal.current.text(modal.model[index].title).removeClass('active');
+      modal.current.text(modal.model[index][modal.titleProp]).removeClass('active');
       modal.current = $(modal.current[0].nextElementSibling);
-      modal.current.text(modal.model[index + 1].title).addClass('active');
+      modal.current.text(modal.model[index + 1][modal.titleProp]).addClass('active');
 
       modal.checkButton(index + 1);
     },
     save: function() {
-      console.log(modal.model);
       layer.close(modal.index);
       modal.callback && modal.callback(modal.model);
     }
   };
 
   return {
-    open: function(model, callback) {
-      modal.open({
-        model: JSON.parse(JSON.stringify(model)),
-        callback: callback
-      });
+    open: function(options) {
+      options.model = JSON.parse(JSON.stringify(options.model));
+      modal.open(options);
     },
     close: modal.close
   };

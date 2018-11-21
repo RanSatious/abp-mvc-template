@@ -1,29 +1,29 @@
 .setting-container {
   padding: 5px;
 }
-.setting-slider .layui-btn {
-  display: block;
-  margin: 5px 0;
-}
 .setting-body {
   margin-right: 50px;
 }
 .setting-body p {
   margin: 5px;
   padding: 5px;
-  background-color: #ccc;
+  border: 1px solid #ccc;
   border-radius: 2px;
   cursor: pointer;
 }
 
 .setting-body p.active,
 .setting-body p:hover {
-  background-color: #009688;
-  color: #fff;
+  border-color: #1e9fff;
 }
 
+.setting-slider .layui-btn {
+  display: block;
+  margin: 5px 0;
+}
 .setting-slider {
-  float: right;
+  position: absolute;
+  right: 5px;
 }
 
 .setting-footer {

@@ -21,12 +21,16 @@ define(['main', 'lib/store', 'lib/table-setting/tableSetting', 'lay!table'], fun
   }
 
   $('#btn-setting').click(function() {
-    settingModal.open(config.fields, function(cols) {
-      config.fields = cols;
-      store.setItem('table_sample', config);
-      table.reload('main-table', {
-        cols: [config.fields]
-      });
+    settingModal.open({
+      model: config.fields,
+      titleProp: 'title',
+      callback: function(cols) {
+        config.fields = cols;
+        store.setItem('table_sample', config);
+        table.reload('main-table', {
+          cols: [config.fields]
+        });
+      }
     });
   });
 
