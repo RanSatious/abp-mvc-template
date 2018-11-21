@@ -551,6 +551,7 @@
     <Content Include="Assets\lib\requirejs-plugins\noext.js" />
     <Content Include="Assets\lib\requirejs-plugins\propertyParser.js" />
     <Content Include="Assets\lib\requirejs-plugins\text.js" />
+    <Content Include="compatibility.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Localization\AbpExtensions\Abp.xml" />

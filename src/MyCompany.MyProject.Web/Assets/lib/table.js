@@ -8,21 +8,21 @@ define(['lib/utils', 'lay!table'], function(utils) {
     params: function(current, limit) {
       return {
         skipCount: (current - 1) * limit,
-        maxResultCount: limit
+        maxResultCount: limit,
       };
     },
-    map: function(data) {
+    parseData: function(data) {
       return {
         code: 0,
         msg: data.error,
         count: data.result.totalCount,
-        data: data.result.items
+        data: data.result.items,
       };
     },
     error: function(error, message) {
       if (error.status == 401) {
         utils.loginOvertime();
       }
-    }
+    },
   });
 });

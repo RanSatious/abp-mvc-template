@@ -1,30 +1,9 @@
-﻿define(['main', 'lay!form', 'lay!table'], function(main) {
+﻿define(['main', 'lay!form', 'lib/table'], function(main) {
   var table = layui.table;
-  var $ = layui.$;
   table.render({
     elem: '#main-table',
     id: 'main-table',
-    cellMinWidth: 80,
     url: '/api/services/app/auditLogs/Get',
-    method: 'POST',
-    contentType: 'application/json',
-    params: function(current, limit) {
-      return {
-        skipCount: (current - 1) * limit,
-        maxResultCount: limit
-      };
-    },
-    map: function(data) {
-      return {
-        code: 0,
-        msg: data.error,
-        count: data.result.totalCount,
-        data: data.result.items
-      };
-    },
-    page: true, //开启分页
-    limits: [10, 20, 30, 50, 100],
-    limit: 10,
     cols: [
       [
         { field: 'userName', title: '用户名', sort: true },
