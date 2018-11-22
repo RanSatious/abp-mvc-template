@@ -38,16 +38,18 @@
     }
     ViewBag.activeMenus = activeMenus;
 }
-<ul class="layui-nav layui-layout-left">
+<ul class="layui-nav @(Model.IsLeft ? "layui-layout-left" : "layui-nav-tree")">
     @foreach (var menuItem in Model.MainMenu.Items)
     {
-        <li class="layui-nav-item @(activeNames.Contains(menuItem.Name) ? "layui-this" : "")">
-            @if (menuItem.Items.Count == 0)
-            {
+        if (menuItem.Items.Count == 0)
+        {
+            <li class="layui-nav-item @(activeNames.Contains(menuItem.Name) ? "layui-this" : "")">
                 <a href="@calculateMenuUrl(menuItem.Url)">@menuItem.DisplayName</a>
-            }
-            else
-            {
+            </li>
+        }
+        else
+        {
+            <li class="layui-nav-item @(activeNames.Contains(menuItem.Name) ? (Model.IsLeft ? "layui-this" : "layui-nav-itemed") : "")">
                 <a href="javascript:;">@menuItem.DisplayName</a>
                 <dl class="layui-nav-child">
                     @foreach (var subMenuItem in menuItem.Items)
@@ -57,8 +59,8 @@
                         </dd>
                     }
                 </dl>
-            }
-        </li>
+            </li>
+        }
 
     }
 </ul>

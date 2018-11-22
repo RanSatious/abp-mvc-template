@@ -43,10 +43,15 @@
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
             <div class="layui-logo">
-              <a href="/">后台布局</a>
+                <a href="/">后台布局</a>
             </div>
             @Html.Action("MainMenuNav", "Layout", new { activeMenu = ViewBag.ActiveMenu })
             @Html.Action("UserInfo", "Layout")
+        </div>
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                @Html.Action("MainMenuNav", "Layout", new { activeMenu = ViewBag.ActiveMenu, isLeft = false })
+            </div>
         </div>
         <div class="layui-body no-side">
             <!-- 内容主体区域 -->

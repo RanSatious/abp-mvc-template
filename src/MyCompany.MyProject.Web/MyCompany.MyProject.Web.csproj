@@ -595,7 +595,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\Results\ChallengeResult.cs" />
-    <Compile Include="Controllers\SampleController.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Models\Account\TenantChangeModalViewModel.cs" />
     <Compile Include="Models\Account\TenantChangeViewModel.cs" />
@@ -637,11 +636,9 @@
     <Content Include="Views\Admin\Roles.cshtml" />
     <Content Include="Views\Admin\Organizations.cshtml" />
     <Content Include="Views\Admin\Dictionary.cshtml" />
-    <Content Include="Views\Sample\Table.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Views\User\PersonalInfo.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <Content Include="Views\Sample\Table.cshtml" />
     <Content Include="Views\Admin\AuditLogs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

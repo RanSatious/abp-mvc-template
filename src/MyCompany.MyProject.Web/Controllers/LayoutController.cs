@@ -24,12 +24,13 @@ namespace MyCompany.MyProject.Web.Controllers
         }
 
         [ChildActionOnly]
-        public PartialViewResult MainMenuNav(string activeMenu = "")
+        public PartialViewResult MainMenuNav(string activeMenu = "", bool isLeft = true)
         {
             var model = new MainMenuNavViewModel()
             {
                 MainMenu = AsyncHelper.RunSync(() => _userNavigationManager.GetMenuAsync("MainMenu", AbpSession.ToUserIdentifier())),
-                ActiveMenuItemName = activeMenu
+                ActiveMenuItemName = activeMenu,
+                IsLeft  = isLeft
             };
 
             return PartialView("_MainMenuNav", model);

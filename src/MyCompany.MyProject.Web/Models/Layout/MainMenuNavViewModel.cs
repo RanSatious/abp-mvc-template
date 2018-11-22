@@ -11,5 +11,7 @@ namespace MyCompany.MyProject.Web.Models.Layout
         public UserMenu MainMenu { get; set; }
 
         public string ActiveMenuItemName { get; set; }
+
+        public bool IsLeft { get; set; }
     }
 }

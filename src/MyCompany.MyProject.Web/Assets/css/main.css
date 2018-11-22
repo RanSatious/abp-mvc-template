@@ -22,12 +22,19 @@
 .layui-body {
   padding: 20px 10px;
 }
+/* 
 .layui-body.no-side {
   left: 0;
 }
 .layui-layout-admin .layui-footer.no-side {
   left: 0;
 }
+.layui-layout-admin .layui-header {
+  background-color: #56607b;
+}
+.layui-layout-admin .layui-logo > a {
+  color: rgba(255, 255, 255, 0.7);
+} */
 /* overrid layui end */
 
 /* modal style start */

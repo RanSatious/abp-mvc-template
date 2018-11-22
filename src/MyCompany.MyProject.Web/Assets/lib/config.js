@@ -1,5 +1,5 @@
 ﻿var appPath = appPath || '/';
-var timeStamp = new Date().getTime();
+var timeStamp = window._version || new Date().getTime();
 var console = console || {
   log: function() {}
 };
@@ -13,7 +13,7 @@ requirejs.config({
     jquery: 'node_modules/jquery/dist/jquery.min',
     // libray
     jstree: 'node_modules/jstree/dist/jstree.min',
-    dayjs:'node_modules/dayjs/dayjs.min',
+    dayjs: 'node_modules/dayjs/dayjs.min',
     // requireJs plugins
     depend: 'lib/requirejs-plugins/depend',
     text: 'lib/requirejs-plugins/text',

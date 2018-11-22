@@ -25,14 +25,6 @@ namespace MyCompany.MyProject.Web
                     )
                 ).AddItem(
                     new MenuItemDefinition(
-                        PageNames.Profile,
-                        L("Profile"),
-                        url: "Profile",
-                        icon: "",
-                        requiresAuthentication: true
-                    )
-                ).AddItem(
-                    new MenuItemDefinition(
                         PageNames.Administration.Index,
                         L("Admin"),
                         url: "Admin",
@@ -77,22 +69,6 @@ namespace MyCompany.MyProject.Web
                     icon: "",
                     requiredPermissionName: PermissionNames.Pages_Administration_AuditLogs
                     ))
-                ).AddItem(
-                    new MenuItemDefinition(
-                        PageNames.Sample.Index,
-                        L("Sample"),
-                        url: "Sample",
-                        icon: "",
-                        requiresAuthentication: true
-                    ).AddItem(
-                        new MenuItemDefinition(
-                            PageNames.Sample.Table,
-                            L("Table"),
-                            url: "Sample/Table",
-                            icon: "",
-                            requiresAuthentication: true
-                        )
-                    )
                 );
         }
 
