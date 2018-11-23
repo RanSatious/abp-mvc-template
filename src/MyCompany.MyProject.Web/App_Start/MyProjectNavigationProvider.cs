@@ -27,7 +27,7 @@ namespace MyCompany.MyProject.Web
                     new MenuItemDefinition(
                         PageNames.Administration.Index,
                         L("Admin"),
-                        url: "Admin",
+                        url: "",
                         icon: "",
                         requiredPermissionName: PermissionNames.Pages_Administration
                     ).AddItem(

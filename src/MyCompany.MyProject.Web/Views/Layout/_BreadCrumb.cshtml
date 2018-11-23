@@ -1,0 +1,24 @@
+﻿@using Abp.Application.Navigation
+@model List<UserMenuItem>
+@{
+    var index = 0;
+    var count = Model.Count;
+}
+<div class="layui-breadcrumb-container">
+    @foreach (var menu in Model)
+    {
+        if (string.IsNullOrEmpty(menu.Url) && menu.Name != PageNames.Home)
+        {
+            <span>@menu.DisplayName</span>
+        }
+        else
+        {
+            <a href="/@menu.Url">@menu.DisplayName</a>   
+        }
+        if (index < count - 1)
+        {
+            <span>-</span>            
+        }
+        index++;
+    }
+</div>

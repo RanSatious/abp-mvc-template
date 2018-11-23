@@ -17,24 +17,28 @@
 .clear {
   clear: both;
 }
+.layui-breadcrumb-container {
+  position: relative;
+  top: -20px;
+  left: -10px;
+  padding: 10px;
+  margin-right: -20px;
+  border-bottom: 1px solid #ccc;
+}
 /* global style end */
 /* overrid layui start */
 .layui-body {
   padding: 20px 10px;
 }
-/* 
-.layui-body.no-side {
-  left: 0;
-}
-.layui-layout-admin .layui-footer.no-side {
-  left: 0;
-}
-.layui-layout-admin .layui-header {
-  background-color: #56607b;
-}
 .layui-layout-admin .layui-logo > a {
   color: rgba(255, 255, 255, 0.7);
-} */
+}
+.layui-layout-admin .layui-logo > a:hover {
+  color: rgba(255, 255, 255);
+}
+.layui-layout-admin .layui-header {
+  background-color: #393d49;
+}
 /* overrid layui end */
 
 /* modal style start */

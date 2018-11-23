@@ -1,18 +1,11 @@
 ﻿@using System.Configuration
-@using System.Threading
-@using System.Web.Optimization
 @using Abp.Application.Navigation
-@using Abp.Configuration
-@using Abp.Timing
-@using MyCompany.MyProject
-@using MyCompany.MyProject.Configuration
-@using Abp.Dependency
-@using Abp.Web.Mvc.Alerts
-@using Abp.Web.Mvc.Extensions
 @{
     Layout = null;
     SetAntiForgeryCookie();
     var version = ConfigurationManager.AppSettings["version"];
+    version = DateTime.Now.Ticks.ToString();
+   
 }
 <!DOCTYPE html>
 <html>
@@ -45,7 +38,6 @@
             <div class="layui-logo">
                 <a href="/">后台布局</a>
             </div>
-            @Html.Action("MainMenuNav", "Layout", new { activeMenu = ViewBag.ActiveMenu })
             @Html.Action("UserInfo", "Layout")
         </div>
         <div class="layui-side layui-bg-black">
@@ -54,6 +46,7 @@
             </div>
         </div>
         <div class="layui-body no-side">
+            @Html.Action("BreadCrumb", "Layout", new { activeMenu = ViewBag.ActiveMenu })
             <!-- 内容主体区域 -->
             @RenderBody()
         </div>

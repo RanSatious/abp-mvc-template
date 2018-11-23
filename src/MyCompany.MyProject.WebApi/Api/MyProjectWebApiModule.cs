@@ -1,9 +1,11 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using System.Web.Http;
 using Abp.Application.Services;
 using Abp.Configuration.Startup;
 using Abp.Modules;
 using Abp.WebApi;
+using Swashbuckle.Application;
 
 namespace MyCompany.MyProject.Api
 {
@@ -19,6 +21,12 @@ namespace MyCompany.MyProject.Api
                 .Build();
 
             Configuration.Modules.AbpWebApi().HttpConfiguration.Filters.Add(new HostAuthenticationFilter("Bearer"));
+
+            Configuration.Modules.AbpWebApi().HttpConfiguration.EnableSwagger(c =>
+            {
+                c.SingleApiVersion("v1", "Api 文档");
+                c.ResolveConflictingActions(desc => desc.First());
+            }).EnableSwaggerUi();
         }
     }
 }

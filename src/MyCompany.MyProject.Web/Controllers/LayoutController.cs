@@ -47,5 +47,39 @@ namespace MyCompany.MyProject.Web.Controllers
             
             return PartialView("_UserInfo", name);
         }
+
+        [ChildActionOnly]
+        public PartialViewResult BreadCrumb(string activeMenu = "")
+        {
+            var mainMenu = AsyncHelper.RunSync(() => _userNavigationManager.GetMenuAsync("MainMenu", AbpSession.ToUserIdentifier()));
+            var homeMenu = mainMenu.Items[0];
+
+            var activeNames = new List<string>();
+            var parent = string.Empty;
+            foreach (string name in activeMenu.Split('.'))
+            {
+                activeNames.Add(string.IsNullOrEmpty(parent) ? name : $"{parent}.{name}");
+                parent = activeNames.Last();
+            }
+
+            var activeMenus = new List<UserMenuItem>();
+            UserMenuItem parentMenu = null;
+            foreach (var name in activeNames)
+            {
+                var sub = (parentMenu == null ? mainMenu.Items : parentMenu.Items).FirstOrDefault(d => d.Name == name);
+                if (sub != null)
+                {
+                    activeMenus.Add(sub);
+                    parentMenu = sub;
+                }
+            }
+
+            if (activeMenus.Count > 0 && activeMenus[0].Name != PageNames.Home)
+            {
+                activeMenus.Insert(0, homeMenu);
+            }
+
+            return PartialView("_BreadCrumb", activeMenus);
+        }
     }
 }
