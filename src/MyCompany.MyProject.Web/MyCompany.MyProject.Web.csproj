@@ -566,6 +566,9 @@
     </Content>
     <Content Include="Views\Admin\_dictionaryItemModal.html" />
     <Content Include="Views\Admin\_dictionaryTypeModal.html" />
+    <Content Include="Views\Admin\_organizationModal.html" />
+    <Content Include="Views\Admin\_roleModal.html" />
+    <Content Include="Views\Admin\_userModal.html" />
     <Content Include="Views\Shared\_Layout.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -634,6 +637,7 @@
     <Content Include="Views\Admin\AuditLogs.cshtml" />
     <Content Include="Views\Layout\_BreadCrumb.cshtml" />
     <Content Include="Views\Layout\_UserInfo.cshtml" />
+    <Content Include="Views\Admin\DictionaryType.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

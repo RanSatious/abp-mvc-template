@@ -18,6 +18,7 @@ namespace MyCompany.MyProject.Web
             public const string AuditLogs = "Administration.AuditLogs";
             public const string OrganizationUnits = "Administration.OrganizationUnits";
             public const string Dictionary = "Administration.Dictionary";
+            public const string DictionaryType = "Administration.DictionaryType";
         }
 
         public static class Sample

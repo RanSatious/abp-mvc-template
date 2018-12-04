@@ -54,22 +54,33 @@ namespace MyCompany.MyProject.Web
                             icon: "",
                             requiredPermissionName: PermissionNames.Pages_Administration_OrganizationUnits
                         )
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            PageNames.Administration.Dictionary,
+                            L("Dictionary"),
+                            url: "Admin/Dictionary",
+                            icon: "",
+                            requiredPermissionName: PermissionNames.Pages_Administration_Dictionary
+                        )
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            PageNames.Administration.Dictionary,
+                            L("DictionaryType"),
+                            url: "Admin/DictionaryType",
+                            icon: "",
+                            isVisible: false,
+                            requiredPermissionName: PermissionNames.Pages_Administration_Dictionary
+                        )
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            PageNames.Administration.AuditLogs,
+                            L("AuditLogs"),
+                            url: "Admin/AuditLogs",
+                            icon: "",
+                            requiredPermissionName: PermissionNames.Pages_Administration_AuditLogs
                     )
-                    .AddItem(new MenuItemDefinition(
-                        PageNames.Administration.Dictionary,
-                        L("Dictionary"),
-                        url: "Admin/Dictionary",
-                        icon: "",
-                        requiredPermissionName: PermissionNames.Pages_Administration_Dictionary
-                        ))
-                    .AddItem(new MenuItemDefinition(
-                    PageNames.Administration.AuditLogs,
-                    L("AuditLogs"),
-                    url: "Admin/AuditLogs",
-                    icon: "",
-                    requiredPermissionName: PermissionNames.Pages_Administration_AuditLogs
-                    ))
-                );
+                )
+            );
         }
 
         private static ILocalizableString L(string name)
