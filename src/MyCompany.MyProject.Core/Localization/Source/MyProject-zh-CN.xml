@@ -132,6 +132,7 @@
     <text name="SensorType" value="传感器类型" />
     <text name="Organization" value="部门" />
     <text name="Dictionary" value="字典" />
+    <text name="DictionaryType" value="字典类型" />
     <text name="AuditLogs" value="日志" />
     <text name="HangFire" value="后台作业" />
     <text name="Statistics" value="统计汇总" />

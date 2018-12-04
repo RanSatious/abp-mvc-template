@@ -64,7 +64,7 @@ namespace MyCompany.MyProject.Web
                         )
                     ).AddItem(
                         new MenuItemDefinition(
-                            PageNames.Administration.Dictionary,
+                            PageNames.Administration.DictionaryType,
                             L("DictionaryType"),
                             url: "Admin/DictionaryType",
                             icon: "",

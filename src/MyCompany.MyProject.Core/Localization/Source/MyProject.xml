@@ -79,6 +79,7 @@
     <text name="Edit">编辑</text>
     <text name="Delete">删除</text>
     <text name="Dictionary" value="字典" />
+    <text name="DictionaryType" value="字典类型" />
     <text name="AuditLogs" value="日志" />
 
   </texts>

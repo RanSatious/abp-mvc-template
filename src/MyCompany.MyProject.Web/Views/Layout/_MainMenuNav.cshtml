@@ -42,6 +42,10 @@
                 <dl class="layui-nav-child">
                     @foreach (var subMenuItem in menuItem.Items)
                     {
+                        if (!subMenuItem.IsVisible)
+                        {
+                            continue;
+                        }
                         <dd class="@(activeNames.Contains(subMenuItem.Name) ? "layui-this" : "")">
                             <a href="@calculateMenuUrl(subMenuItem.Url)">@subMenuItem.DisplayName</a>
                         </dd>
